@@ -81,15 +81,15 @@ public class ComplexTestClient
          logger.log(Level.INFO, "Player " + player.toString());
       }
 
-      gameSpin(gameEngine);
+      gameSpin(gameEngine, 1, 100, randomDelayIncre(100,1));
       gameResult(players, turn_number);
 
    }
 
-   private static void gameSpin(GameEngine gameEngine){
+   private static void gameSpin(GameEngine gameEngine, int ini_delay, int final_delay, int delay_incre){
       logger.log(Level.INFO, "========= SPIN RESULT :============== ");
 
-      gameEngine.spin(1, 100, 5);
+      gameEngine.spin(ini_delay, final_delay, delay_incre);
    }
 
    //Randomize Select a bet point for player
@@ -114,6 +114,12 @@ public class ComplexTestClient
       }
 
 
+   }
+
+   private static int randomDelayIncre(int max, int min){
+      double val = (double)(max - min + 1)/100*(new Random().nextInt(100));
+
+      return (int)Math.round(val);
    }
 
    // private helper method to log wheel slots

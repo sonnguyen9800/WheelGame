@@ -74,21 +74,37 @@ public class GameEngineImpl implements GameEngine {
         Random random = new Random();
         return slotsCollection.get(random.nextInt(slotsCollection.size()));
     }
+    private Slot moveToNextSlot(Slot currentSlot, ArrayList<Slot> slotsCollection){
+        int index = 0;
+        for (int i = 0; i < slotsCollection.size(); i++){
+            if (slotsCollection.get(i).equals(currentSlot)){
+                index = i;
+                break;
+            }
+        }
+
+        if (index == slotsCollection.size() - 1){
+            return slotsCollection.get(0);
+        }else{
+            return slotsCollection.get(index+1);
+        }
+    }
 
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         int delay = initialDelay;
-        Slot nextSlot = randomlySelectASlot(SlotsCollection);
+        Slot firstSlot = randomlySelectASlot(SlotsCollection);
+        Slot nextSlot = firstSlot;
 
 //        GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
 //        this.addGameEngineCallback(gameEngineCallback);
         GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
       //  this.addGameEngineCallback(gameEngineCallback);
-        gameEngineCallback.nextSlot(nextSlot, this);
+        gameEngineCallback.nextSlot(firstSlot, this);
 
         while (delay < finalDelay){
             delay += delayIncrement;
-            nextSlot = randomlySelectASlot(SlotsCollection);
+            nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
             gameEngineCallback.nextSlot(nextSlot, this);
         }
 
