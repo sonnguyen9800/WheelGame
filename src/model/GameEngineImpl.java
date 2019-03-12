@@ -12,7 +12,6 @@ import view.interfaces.GameEngineCallback;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameEngineImpl implements GameEngine {
@@ -20,8 +19,8 @@ public class GameEngineImpl implements GameEngine {
     private static final Logger logger = Logger.getLogger(TestClient.class.getName());
 
 
-    private final static Integer POS_RANGE_LOW = 1;
-    private final static Integer POS_RANGE_HIGH = 36;
+    private final static Integer POS_RANGE_LOW = 0;
+    private final static Integer POS_RANGE_HIGH = 38;
 
     //Collection of Player:
     private ArrayList<Player> Players = new ArrayList<>();
@@ -30,27 +29,43 @@ public class GameEngineImpl implements GameEngine {
     private ArrayList<GameEngineCallback> GameEnginesCallBacks = new ArrayList<>();
 
     //Collection of Slots:
-    private ArrayList<Slot> SlotsCollection = new ArrayList<>();
+    private static ArrayList<Slot> SlotsCollection = iniSlotCollection();
 
-    private void iniSlotCollection(){
-        SlotsCollection.add(new SlotImpl(0, 0, Color.GREEN0));
+    private static ArrayList<Slot> iniSlotCollection(){
+        ArrayList<Slot> SlotsCo = new ArrayList<>();
+        SlotsCo.add(new SlotImpl(0, 0, Color.Green00));
+        int[] red = {27, 25, 12, 19, 18, 21, 16, 23, 14, 9, 30, 7, 32, 5, 34, 3, 36, 1};
+        int[] black = {10, 29, 8, 31, 6, 33, 4, 35 , 2, 28, 26, 11, 20, 17, 22, 15, 24, 13};
 
-        for (int i = POS_RANGE_LOW; i <= POS_RANGE_HIGH; i++){
 
-            Color color;
-            if (i % 2 == 0){
-                color = Color.BLACK;
-            }else{
-                color = Color.RED;
-            }
+        int num = 1;
+        int redLeft = 0;
+        int blackLeft = 0;
 
-            SlotImpl slot = new SlotImpl(i, i, color);
-            SlotsCollection.add(slot);
+        while (num <= 37){
+            Color color; int val;
 
+            if (num == 19){
+                color = Color.Green0;
+                val = 0;
+                SlotImpl slot = new SlotImpl(num, val, color);
+                SlotsCo.add(slot);
+                num++;
+                continue; }
+
+            if (num % 2 != 0){ color = Color.Red;val = red[redLeft];redLeft++;
+            }else { color = Color.Black;val = black[blackLeft];blackLeft++; }
+
+            SlotImpl slot = new SlotImpl(num, val, color);
+            SlotsCo.add(slot);
+            num++;
         }
-        SlotsCollection.add(new SlotImpl(POS_RANGE_HIGH + 1, POS_RANGE_HIGH + 1, Color.GREEN00));
-
+        return SlotsCo;
     }
+
+
+
+    // Random select a Slot from the Slot Collection
     private Slot randomlySelectASlot(ArrayList<Slot> slotsCollection){
         if (slotsCollection.isEmpty()){
             return null;
@@ -65,10 +80,11 @@ public class GameEngineImpl implements GameEngine {
         int delay = initialDelay;
         Slot firstSlot = randomlySelectASlot(SlotsCollection);
 
+//        GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
+//        this.addGameEngineCallback(gameEngineCallback);
         GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
-        this.addGameEngineCallback(gameEngineCallback);
+      //  this.addGameEngineCallback(gameEngineCallback);
 
-        gameEngineCallback.nextSlot(firstSlot, this);
         Slot nextSlot = firstSlot;
 
         while (delay < finalDelay){

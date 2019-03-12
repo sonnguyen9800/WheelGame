@@ -19,7 +19,7 @@ public enum BetType
       @Override
       public void applyWinLoss(Player player, Slot winSlot)
       {
-        if (winSlot.getColor() == Color.RED){
+        if (winSlot.getColor() == Color.Red){
             player.setPoints(player.getPoints() + player.getBet());
         }else{
             player.setPoints(player.getPoints() - player.getBet());
@@ -30,7 +30,7 @@ public enum BetType
    BLACK {
        @Override
        public void applyWinLoss(Player player, Slot winSlot) {
-           if (winSlot.getColor() == Color.BLACK){
+           if (winSlot.getColor() == Color.Black){
                player.setPoints(player.getPoints() + player.getBet());
            }else{
                player.setPoints(player.getPoints() - player.getBet());
@@ -42,7 +42,7 @@ public enum BetType
    GREEN0{
       @Override
       public void applyWinLoss(Player player, Slot winSlot) {
-          if (winSlot.getColor() == Color.GREEN0){
+          if (winSlot.getColor() == Color.Green0){
               player.setPoints(player.getPoints() + (WHEEL_SIZE/2 -1)*player.getPoints());
           }else{
               player.setPoints(player.getPoints() - player.getBet());
@@ -54,7 +54,7 @@ public enum BetType
     GREEN00{
         @Override
         public void applyWinLoss(Player player, Slot winSlot) {
-            if (winSlot.getColor() == Color.GREEN00){
+            if (winSlot.getColor() == Color.Green00){
                 player.setPoints(player.getPoints() + (WHEEL_SIZE/2 -1)*player.getPoints());
             }else{
                 player.setPoints(player.getPoints() - player.getBet());

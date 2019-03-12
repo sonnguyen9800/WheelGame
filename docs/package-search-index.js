@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"model.enumeration"},{"l":"model.interfaces"},{"l":"view.interfaces"}]

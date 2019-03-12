@@ -37,10 +37,10 @@ public class SlotImpl implements Slot {
 
     @Override
     public String toString() {
-
-        return "Position " + getPosition()
-                + " Color " + getColor() +
-                " Number: " + getNumber();
+// Position: 0, Color: Green00, Number: 0
+        return "Position: " + getPosition()
+                + ", Color: " + getColor() +
+                ", Number: " + getNumber();
     }
 
     //TODO: Finish this hascode() and equals() - using JCF Collections
@@ -56,4 +56,6 @@ public class SlotImpl implements Slot {
         Slot slot = (Slot)obj;
         return this.equals(slot);
     }
+
+
 }

@@ -24,7 +24,7 @@ public interface Slot
    public static final int WHEEL_SIZE = 38;
 
    /**
-    * @return - the position of this slot (clockwise starting from position 0 for Slot GREEN00)
+    * @return - the position of this slot (clockwise starting from position 0 for Slot Green00)
     */
    public int getPosition();
 
