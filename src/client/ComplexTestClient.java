@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 public class ComplexTestClient
 {
    private static final Logger logger = Logger.getLogger(ComplexTestClient.class.getName());
-   private static final Integer MAX_TURN_PLAY = 1;
+   private static final Integer MAX_TURN_PLAY = 2;
 
    public static void main(String[] args)
    {
@@ -50,6 +50,10 @@ public class ComplexTestClient
       gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
 
 
+      //ADD PLAYER TO THE Game Engine
+      for (Player player : players){
+         gameEngine.addPlayer(player);
+      }
 
       int turn = 0;
 
@@ -58,32 +62,35 @@ public class ComplexTestClient
          turn++;
       }
 
-      logger.log(Level.INFO, "========= SPIN RESULT :============== ");
 
-      gameEngine.spin(1, 100, 5);
+   }
 
-
-      // main loop to add players and place a bet
-
-      logger.log(Level.INFO, "=========END GAME ============== ");
+   private static void gameResult(Player[] players , int turn_number){
+      logger.log(Level.INFO, "=========END TURN: " + turn_number + " ===============" );
 
       for (Player player : players){
          logger.log(Level.INFO, " Player Result: " + player.toString());
       }
-
-
    }
+
    private static void turnBet(Player[] players, GameEngine gameEngine, int turn_number){
       logger.log(Level.INFO, "========== TURN NUMBER: " + turn_number + " ==========");
 
-      for (Player player : players)
-      {
-         gameEngine.addPlayer(player);
+      for (Player player : players) {
          gameEngine.placeBet(player, playersBet(player), playersBettype());
          logger.log(Level.INFO, "Player " + player.toString());
       }
+
+      gameSpin(gameEngine);
+      gameResult(players, turn_number);
+
    }
 
+   private static void gameSpin(GameEngine gameEngine){
+      logger.log(Level.INFO, "========= SPIN RESULT :============== ");
+
+      gameEngine.spin(1, 100, 5);
+   }
 
    //Randomize Select a bet point for player
    private static int playersBet(Player player){

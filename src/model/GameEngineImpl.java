@@ -78,14 +78,13 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         int delay = initialDelay;
-        Slot firstSlot = randomlySelectASlot(SlotsCollection);
+        Slot nextSlot = randomlySelectASlot(SlotsCollection);
 
 //        GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
 //        this.addGameEngineCallback(gameEngineCallback);
         GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
       //  this.addGameEngineCallback(gameEngineCallback);
-
-        Slot nextSlot = firstSlot;
+        gameEngineCallback.nextSlot(nextSlot, this);
 
         while (delay < finalDelay){
             delay += delayIncrement;
