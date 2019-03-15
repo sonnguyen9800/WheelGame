@@ -3,6 +3,8 @@ package model;
 import model.enumeration.Color;
 import model.interfaces.Slot;
 
+import java.util.Objects;
+
 public class SlotImpl implements Slot {
     private int position;
     private int number;
@@ -46,7 +48,7 @@ public class SlotImpl implements Slot {
     //TODO: Finish this hascode() and equals() - using JCF Collections
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(position, number, color);
     }
 
     @Override
