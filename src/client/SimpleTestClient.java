@@ -67,10 +67,6 @@ public class SimpleTestClient
       // after it calls GameEngine.calculateResult())
       // OutputTrace.txt was generated with these parameter values
       gameEngine.spin(1, 100000, 2);
-
-
-
-      // TODO reset bets for next round if you were playing again
    }
 
    // private helper method to log wheel slots

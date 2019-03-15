@@ -8,10 +8,8 @@ public class SimplePlayer implements Player {
     private String playerName;
     private int point;
 
-    //TODO: recheck the bettype attribute;
     private BetType betType;
 
-    //TODO: recheck the bet attribute
     private int bet;
 
     public SimplePlayer(String playerID, String playerName, int initialPoint) {
@@ -48,7 +46,6 @@ public class SimplePlayer implements Player {
         return playerID;
     }
 
-    //TODO: check this method: setBet and getBet
     @Override
     public boolean setBet(int bet) {
         if (bet > 0 && bet <= getPoints()){

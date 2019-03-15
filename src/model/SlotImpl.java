@@ -45,7 +45,6 @@ public class SlotImpl implements Slot {
                 ", Number: " + getNumber();
     }
 
-    //TODO: Finish this hascode() and equals() - using JCF Collections
     @Override
     public int hashCode() {
         return Objects.hash(position, number, color);
