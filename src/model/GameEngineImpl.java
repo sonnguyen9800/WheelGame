@@ -91,6 +91,11 @@ public class GameEngineImpl implements GameEngine {
         gameEngineCallback.nextSlot(firstSlot, this);
 
         while (delay < finalDelay){
+            try {
+                Thread.sleep((long)delay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             delay += delayIncrement;
             nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
             gameEngineCallback.nextSlot(nextSlot, this);
