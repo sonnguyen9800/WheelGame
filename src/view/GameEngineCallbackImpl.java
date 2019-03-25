@@ -32,7 +32,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback
    public void nextSlot(Slot slot, GameEngine engine)
    {
       // intermediate results logged at Level.FINE
-      logger.log(INFO, "Next Slot " + slot.toString());
+      logger.log(FINE, "Next Slot " + slot.toString());
 
    }
 
