@@ -15,10 +15,10 @@ import java.util.Random;
 public class GameEngineImpl implements GameEngine {
 
     //Collection of Player:
-    private ArrayList<Player> Players = new ArrayList<>();
+    private Collection<Player> Players = new ArrayList<>();
 
     //Collection of GameEngineCallback
-    private ArrayList<GameEngineCallback> GameEnginesCallBacks = new ArrayList<>();
+    private Collection<GameEngineCallback> GameEnginesCallBacks = new ArrayList<>();
 
     //Collection of Slots:
     private static ArrayList<Slot> SlotsCollection = iniSlotCollection();
