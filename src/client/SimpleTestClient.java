@@ -66,7 +66,7 @@ public class SimpleTestClient
       // NOTE: result logging is done via GameEngineCallback.result() 
       // after it calls GameEngine.calculateResult())
       // OutputTrace.txt was generated with these parameter values
-      gameEngine.spin(1, 100000, 2);
+      gameEngine.spin(1, 100, 2);
    }
 
    // private helper method to log wheel slots
