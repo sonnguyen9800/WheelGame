@@ -5,7 +5,6 @@ import model.enumeration.Color;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
-import view.GameEngineCallbackImpl;
 import view.interfaces.GameEngineCallback;
 
 import java.util.ArrayList;
