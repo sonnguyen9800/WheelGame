@@ -87,9 +87,7 @@ public class GameEngineImpl implements GameEngine {
         Slot nextSlot = randomlySelectASlot(SlotsCollection);
 
 
-        GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
-        this.addGameEngineCallback(gameEngineCallback);
-        gameEngineCallback.nextSlot(nextSlot, this);
+
 
         while (initialDelay < finalDelay){
             try {
@@ -99,11 +97,17 @@ public class GameEngineImpl implements GameEngine {
             }
             initialDelay += delayIncrement;
             nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
-            gameEngineCallback.nextSlot(nextSlot, this);
+
+            for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
+                gameEngineCallback.nextSlot(nextSlot, this);
+            }
+
         }
 
         this.calculateResult(nextSlot);
-        gameEngineCallback.result(nextSlot, this);
+        for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
+            gameEngineCallback.result(nextSlot, this);
+        }
 
     }
 
