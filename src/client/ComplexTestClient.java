@@ -31,6 +31,12 @@ public class ComplexTestClient
 {
    private static final Logger logger = Logger.getLogger(ComplexTestClient.class.getName());
    private static final Integer MAX_TURN_PLAY = 2;
+   private static final Integer INI_DELAY = 1;
+   private static final Integer FIN_DELAY = 100;
+
+   private static final Integer RANDOM_MAX = 100;
+   private static final Integer RANDOM_MIN = 10;
+
 
    public static void main(String[] args)
    {
@@ -49,6 +55,8 @@ public class ComplexTestClient
       // add logging callback
       gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
 
+      //Print the Wheel:
+      logWheel(gameEngine.getWheelSlots());
 
       //ADD PLAYER TO THE Game Engine
       for (Player player : players){
@@ -73,6 +81,9 @@ public class ComplexTestClient
       }
    }
 
+   /*
+   PLAYERS BEGIN TO BET
+    */
    private static void turnBet(Player[] players, GameEngine gameEngine, int turn_number){
       logger.log(Level.INFO, "========== TURN NUMBER: " + turn_number + " ==========");
 
@@ -81,15 +92,19 @@ public class ComplexTestClient
          logger.log(Level.INFO, "Player " + player.toString());
       }
 
-      gameSpin(gameEngine, 1, 100, randomDelayIncre(100,1));
+      gameSpin(gameEngine, randomDelayIncre());
       gameResult(players, turn_number);
 
    }
 
-   private static void gameSpin(GameEngine gameEngine, int ini_delay, int final_delay, int delay_incre){
+   /*
+   SPIN THE WHEEL -
+   SET THE INCREMENT OF THE WHEEL SPIN THROUGH DELAY PARAMETER; SEE INI_DELAY, FIN_DELAY stastic inteter
+    */
+   private static void gameSpin(GameEngine gameEngine, int delay_incre){
       logger.log(Level.INFO, "========= SPIN RESULT :============== ");
 
-      gameEngine.spin(ini_delay, final_delay, delay_incre);
+      gameEngine.spin(INI_DELAY, FIN_DELAY, delay_incre);
    }
 
    //Randomize Select a bet point for player
@@ -98,6 +113,8 @@ public class ComplexTestClient
       return random.nextInt(player.getPoints());
    }
 
+   //Random Select a Bettype for each player
+   //The chance thay choose RED:BLACK:GREEN = 4 : 4 : 2 = 2 : 2 : 1
    private static BetType playersBettype(){
 
       Random random = new Random();
@@ -116,9 +133,9 @@ public class ComplexTestClient
 
    }
 
-   private static int randomDelayIncre(int max, int min){
-      double val = (double)(max - min + 1)/100*(new Random().nextInt(100));
-
+   //Random generator to select the Delay Increment
+   private static int randomDelayIncre(){
+      double val = (double)(RANDOM_MAX - RANDOM_MIN + 1)/100*(new Random().nextInt(RANDOM_MAX));
       return (int)Math.round(val);
    }
 

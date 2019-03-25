@@ -1,6 +1,5 @@
 package model;
 
-import client.TestClient;
 import model.enumeration.BetType;
 import model.enumeration.Color;
 import model.interfaces.GameEngine;
@@ -12,15 +11,8 @@ import view.interfaces.GameEngineCallback;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
-import java.util.logging.Logger;
 
 public class GameEngineImpl implements GameEngine {
-
-    private static final Logger logger = Logger.getLogger(TestClient.class.getName());
-
-
-    private final static Integer POS_RANGE_LOW = 0;
-    private final static Integer POS_RANGE_HIGH = 38;
 
     //Collection of Player:
     private ArrayList<Player> Players = new ArrayList<>();

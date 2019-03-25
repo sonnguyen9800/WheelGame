@@ -28,8 +28,6 @@ import java.util.logging.Logger;
 public class TestClient
 {
    private static final Logger logger = Logger.getLogger(TestClient.class.getName());
-   private static final Integer MAX_TURN_PLAY = 10;
-
 
    public static void main(String[] args)
    {

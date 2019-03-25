@@ -7,6 +7,8 @@ import model.interfaces.GameEngine;
 import model.interfaces.Slot;
 import view.interfaces.GameEngineCallback;
 
+import static java.util.logging.Level.INFO;
+
 /**
  * 
  * Skeleton/Partial example implementation of GameEngineCallback showing Java logging behaviour
@@ -29,7 +31,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback
    public void nextSlot(Slot slot, GameEngine engine)
    {
       // intermediate results logged at Level.FINE
-      logger.log(Level.INFO, "Next Slot " + slot.toString());
+      logger.log(INFO, "Next Slot " + slot.toString());
 
    }
 
@@ -37,7 +39,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback
    public void result(Slot result, GameEngine engine)
    {
       // final results logged at Level.INFO
-      logger.log(Level.INFO, "Result: " +result.toString());
+      logger.log(INFO, "Result: " +result.toString());
 
    }
 }
