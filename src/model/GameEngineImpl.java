@@ -22,7 +22,6 @@ public class GameEngineImpl implements GameEngine {
 
     //Collection of Slots:
     private static ArrayList<Slot> SlotsCollection = iniSlotCollection();
-
     private static ArrayList<Slot> iniSlotCollection(){
         ArrayList<Slot> SlotsCo = new ArrayList<>();
         SlotsCo.add(new SlotImpl(0, 0, Color.Green00));
@@ -56,7 +55,6 @@ public class GameEngineImpl implements GameEngine {
     }
 
 
-
     // Random select a Slot from the Slot Collection
     private Slot randomlySelectASlot(ArrayList<Slot> slotsCollection){
         if (slotsCollection.isEmpty()){
@@ -88,10 +86,8 @@ public class GameEngineImpl implements GameEngine {
         Slot firstSlot = randomlySelectASlot(SlotsCollection);
         Slot nextSlot = firstSlot;
 
-//        GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
-//        this.addGameEngineCallback(gameEngineCallback);
         GameEngineCallbackImpl gameEngineCallback = new GameEngineCallbackImpl();
-      //  this.addGameEngineCallback(gameEngineCallback);
+        this.addGameEngineCallback(gameEngineCallback);
         gameEngineCallback.nextSlot(firstSlot, this);
 
         while (delay < finalDelay){
@@ -184,7 +180,6 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public Collection<Slot> getWheelSlots() {
-        iniSlotCollection();
         return SlotsCollection;
     }
 }
