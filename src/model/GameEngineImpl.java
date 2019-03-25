@@ -10,6 +10,7 @@ import view.interfaces.GameEngineCallback;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 public class GameEngineImpl implements GameEngine {
@@ -21,9 +22,9 @@ public class GameEngineImpl implements GameEngine {
     private Collection<GameEngineCallback> GameEnginesCallBacks = new ArrayList<>();
 
     //Collection of Slots:
-    private static ArrayList<Slot> SlotsCollection = iniSlotCollection();
-    private static ArrayList<Slot> iniSlotCollection(){
-        ArrayList<Slot> SlotsCo = new ArrayList<>();
+    private static List<Slot> SlotsCollection = iniSlotCollection();
+    private static List<Slot> iniSlotCollection(){
+        List<Slot> SlotsCo = new ArrayList<>();
         SlotsCo.add(new SlotImpl(0, 0, Color.Green00));
         int[] red = {27, 25, 12, 19, 18, 21, 16, 23, 14, 9, 30, 7, 32, 5, 34, 3, 36, 1};
         int[] black = {10, 29, 8, 31, 6, 33, 4, 35 , 2, 28, 26, 11, 20, 17, 22, 15, 24, 13};
@@ -56,7 +57,7 @@ public class GameEngineImpl implements GameEngine {
 
 
     // Random select a Slot from the Slot Collection
-    private Slot randomlySelectASlot(ArrayList<Slot> slotsCollection){
+    private Slot randomlySelectASlot(List<Slot> slotsCollection){
         if (slotsCollection.isEmpty()){
             return null;
         }
@@ -64,7 +65,7 @@ public class GameEngineImpl implements GameEngine {
         Random random = new Random();
         return slotsCollection.get(random.nextInt(slotsCollection.size()));
     }
-    private Slot moveToNextSlot(Slot currentSlot, ArrayList<Slot> slotsCollection){
+    private Slot moveToNextSlot(Slot currentSlot, List<Slot> slotsCollection){
         int index = 0;
         for (int i = 0; i < slotsCollection.size(); i++){
             if (slotsCollection.get(i).equals(currentSlot)){
