@@ -83,11 +83,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
-        //int delay = initialDelay;
         Slot nextSlot = randomlySelectASlot(SlotsCollection);
-
-
-
 
         while (initialDelay < finalDelay){
             try {
