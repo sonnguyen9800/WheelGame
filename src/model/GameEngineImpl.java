@@ -15,13 +15,18 @@ import java.util.Random;
 public class GameEngineImpl implements GameEngine {
 
     //Collection of Player:
-    private Collection<Player> Players = new ArrayList<>();
+    private ArrayList<Player> Players = new ArrayList<>();
 
     //Collection of GameEngineCallback
-    private Collection<GameEngineCallback> GameEnginesCallBacks = new ArrayList<>();
+    private Collection<GameEngineCallback> GameEnginesCallBacks;
 
     //Collection of Slots:
     private static List<Slot> SlotsCollection = iniSlotCollection();
+
+    public GameEngineImpl() {
+        GameEnginesCallBacks = new ArrayList<>();
+    }
+
     private static List<Slot> iniSlotCollection(){
         List<Slot> SlotsCo = new ArrayList<>();
         SlotsCo.add(new SlotImpl(0, Color.GREEN00,0));
