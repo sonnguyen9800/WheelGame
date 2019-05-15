@@ -39,7 +39,7 @@ public class SlotImpl implements Slot {
 
     @Override
     public String toString() {
-        String color = null;
+        String color = "";
 
         switch (getColor()){
             case GREEN00:

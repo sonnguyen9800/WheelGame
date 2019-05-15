@@ -4,7 +4,6 @@ import model.SimplePlayer;
 import model.SlotImpl;
 import model.enumeration.BetType;
 import model.enumeration.Color;
-import model.interfaces.Player;
 
 import static model.enumeration.Color.*;
 
