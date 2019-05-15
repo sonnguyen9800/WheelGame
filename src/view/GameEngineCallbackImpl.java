@@ -21,7 +21,7 @@ import static java.util.logging.Level.INFO;
 public class GameEngineCallbackImpl implements GameEngineCallback
 {
    private static final Logger logger = Logger.getLogger(GameEngineCallback.class.getName());
-
+   //TODO: FIX THE LEVEL after finish
    public GameEngineCallbackImpl()
    {
       // FINE shows wheel spinning output, INFO only shows result

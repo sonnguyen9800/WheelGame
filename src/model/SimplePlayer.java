@@ -78,10 +78,10 @@ public class SimplePlayer implements Player {
 
     @Override
     public String toString() {
-        return "Data: player ID " + this.getPlayerId() + " Player Name: "
-                + this.getPlayerName() + " Current Point "
-                + this.getPoints() + " Bet Point: "
-                + this.getBet() + " Type:"
-                + this.getBetType();
+        return "Player:id=" + this.getPlayerId() + ", name="+ this.getPlayerName() +
+                ", bet=" + this.getBet() +
+                ", betType=" + this.getBetType()+
+                ", points=" + this.getPoints();
+
     }
 }
