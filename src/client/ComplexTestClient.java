@@ -125,9 +125,9 @@ public class ComplexTestClient
       } else if (val <= 8){
          return BetType.BLACK;
       } else if (val == 9){
-         return BetType.GREEN0;
+         return BetType.ZEROS;
       } else {
-         return BetType.GREEN00;
+         return BetType.ZEROS;
       }
 
 

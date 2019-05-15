@@ -3,6 +3,7 @@ package model.enumeration;
 import model.interfaces.Player;
 import model.interfaces.Slot;
 
+
 import static model.interfaces.Slot.WHEEL_SIZE;
 
 /**
@@ -14,6 +15,7 @@ import static model.interfaces.Slot.WHEEL_SIZE;
  */
 public enum BetType
 {
+
    RED
    {
       @Override
@@ -39,19 +41,8 @@ public enum BetType
 
        }
        },
-   GREEN0{
-      @Override
-      public void applyWinLoss(Player player, Slot winSlot) {
-          if (winSlot.getColor() == Color.Green0){
-              player.setPoints(player.getPoints() + (WHEEL_SIZE/2 -1)*player.getPoints());
-          }else{
-              player.setPoints(player.getPoints() - player.getBet());
-          }
 
-
-      }
-   },
-    GREEN00{
+    ZEROS{
         @Override
         public void applyWinLoss(Player player, Slot winSlot) {
             if (winSlot.getColor() == Color.Green00){
@@ -73,6 +64,5 @@ public enum BetType
     * @param winSlot - the winning slot the ball landed on
     */
    public abstract void applyWinLoss(Player player, Slot winSlot);
-
 
 }

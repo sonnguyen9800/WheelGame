@@ -10,4 +10,6 @@ package model.enumeration;
 public enum Color
 {
    Red, Black, Green0, Green00
+
+
 }

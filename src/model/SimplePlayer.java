@@ -18,7 +18,7 @@ public class SimplePlayer implements Player {
         this.point = initialPoint;
 
         this.bet = 0;
-        this.betType = BetType.GREEN0;
+        this.betType = BetType.ZEROS;
     }
 
     @Override
