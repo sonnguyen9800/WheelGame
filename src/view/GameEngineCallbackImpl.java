@@ -25,14 +25,14 @@ public class GameEngineCallbackImpl implements GameEngineCallback
    public GameEngineCallbackImpl()
    {
       // FINE shows wheel spinning output, INFO only shows result
-      logger.setLevel(Level.FINE);
+      logger.setLevel(Level.INFO);
    }
 
    @Override
    public void nextSlot(Slot slot, GameEngine engine)
    {
       // intermediate results logged at Level.FINE
-      logger.log(FINE, "Next Slot " + slot.toString());
+      logger.log(INFO, "Next Slot " + slot.toString());
 
    }
 

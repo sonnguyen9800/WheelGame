@@ -84,7 +84,7 @@ public class GameEngineImpl implements GameEngine {
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         Slot nextSlot = randomlySelectASlot(SlotsCollection);
 
-        while (initialDelay < finalDelay){
+        while (initialDelay < (finalDelay-delayIncrement)){
             try {
                 Thread.sleep((long)initialDelay);
             } catch (InterruptedException e) {
@@ -98,10 +98,10 @@ public class GameEngineImpl implements GameEngine {
             }
 
         }
-
-        this.calculateResult(nextSlot);
+        Slot lastSlot = moveToNextSlot(nextSlot, SlotsCollection);
+        this.calculateResult(lastSlot);
         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
-            gameEngineCallback.result(nextSlot, this);
+            gameEngineCallback.result(lastSlot, this);
         }
 
     }
