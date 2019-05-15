@@ -71,7 +71,7 @@ public interface Player
    /**
     * @return - a human readable String that lists the values of this Player<br>
     * <br>
-    * e.g "Player: id=1, name=Come In Spinner, bet=100, betType=Red, points=900"<br>
+    * e.g "Player: id=1, name=Come In Spinner, bet=100, betType=RED, points=900"<br>
     *     (see OutputTrace.txt)
     */
    @Override

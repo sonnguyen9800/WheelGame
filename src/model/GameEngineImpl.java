@@ -24,7 +24,7 @@ public class GameEngineImpl implements GameEngine {
     private static List<Slot> SlotsCollection = iniSlotCollection();
     private static List<Slot> iniSlotCollection(){
         List<Slot> SlotsCo = new ArrayList<>();
-        SlotsCo.add(new SlotImpl(0, 0, Color.Green00));
+        SlotsCo.add(new SlotImpl(0, 0, Color.GREEN00));
         int[] red = {27, 25, 12, 19, 18, 21, 16, 23, 14, 9, 30, 7, 32, 5, 34, 3, 36, 1};
         int[] black = {10, 29, 8, 31, 6, 33, 4, 35 , 2, 28, 26, 11, 20, 17, 22, 15, 24, 13};
 
@@ -37,15 +37,15 @@ public class GameEngineImpl implements GameEngine {
             Color color; int val;
 
             if (num == 19){
-                color = Color.Green0;
+                color = Color.GREEN0;
                 val = 0;
                 SlotImpl slot = new SlotImpl(num, val, color);
                 SlotsCo.add(slot);
                 num++;
                 continue; }
 
-            if (num % 2 != 0){ color = Color.Red;val = red[redLeft];redLeft++;
-            }else { color = Color.Black;val = black[blackLeft];blackLeft++; }
+            if (num % 2 != 0){ color = Color.RED;val = red[redLeft];redLeft++;
+            }else { color = Color.BLACK;val = black[blackLeft];blackLeft++; }
 
             SlotImpl slot = new SlotImpl(num, val, color);
             SlotsCo.add(slot);

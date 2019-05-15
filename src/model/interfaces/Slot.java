@@ -24,7 +24,7 @@ public interface Slot
    public static final int WHEEL_SIZE = 38;
 
    /**
-    * @return - the position of this slot (clockwise starting from position 0 for Slot Green00)
+    * @return - the position of this slot (clockwise starting from position 0 for Slot GREEN00)
     */
    public int getPosition();
 
@@ -42,7 +42,7 @@ public interface Slot
    * @return <pre> A human readable String that lists the values of this WheelSlot instance (see OutputTrace.txt) 
    * 
    * <b>NOTE:</b> Must use "proper naming" case i.e. First letter capitalised       
-   * e.g. "Position: 0, Color: Green00, Number: 0" for "00" slot at top of wheel</pre>
+   * e.g. "Position: 0, Color: GREEN00, Number: 0" for "00" slot at top of wheel</pre>
    */
    @Override
    public abstract String toString();
