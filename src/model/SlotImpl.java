@@ -10,7 +10,7 @@ public class SlotImpl implements Slot {
     private int number;
     private Color color;
 
-    public SlotImpl(int position, int number, Color color) {
+    public SlotImpl(int position,  Color color, int number) {
         this.position = position;
         this.number = number;
         this.color = color;
