@@ -10,7 +10,7 @@ public class SlotImpl implements Slot {
     private int number;
     private Color color;
 
-    public SlotImpl(int position,  Color color, int number) {
+    public SlotImpl(int position, Color color, int number) {
         this.position = position;
         this.number = number;
         this.color = color;
@@ -41,7 +41,7 @@ public class SlotImpl implements Slot {
     public String toString() {
         String color = "";
 
-        switch (getColor()){
+        switch (getColor()) {
             case GREEN00:
                 color = "Green00";
                 break;
@@ -56,7 +56,7 @@ public class SlotImpl implements Slot {
                 break;
         }
         return "Position: " + getPosition()
-                + ", Color: " + color+
+                + ", Color: " + color +
                 ", Number: " + getNumber();
     }
 
@@ -67,9 +67,13 @@ public class SlotImpl implements Slot {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) { return true; }
-        if (!(obj instanceof Slot)) { return false; }
-        Slot slot = (Slot)obj;
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Slot)) {
+            return false;
+        }
+        Slot slot = (Slot) obj;
         return this.equals(slot);
     }
 
