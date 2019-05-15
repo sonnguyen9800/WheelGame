@@ -39,8 +39,24 @@ public class SlotImpl implements Slot {
 
     @Override
     public String toString() {
+        String color = null;
+
+        switch (getColor()){
+            case GREEN00:
+                color = "Green00";
+                break;
+            case GREEN0:
+                color = "Green0";
+                break;
+            case RED:
+                color = "Red";
+                break;
+            case BLACK:
+                color = "Black";
+                break;
+        }
         return "Position: " + getPosition()
-                + ", Color: " + getColor() +
+                + ", Color: " + color+
                 ", Number: " + getNumber();
     }
 
