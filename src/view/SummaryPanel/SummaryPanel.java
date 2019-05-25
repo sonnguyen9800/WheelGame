@@ -5,6 +5,7 @@ import model.enumeration.BetType;
 import model.interfaces.Player;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class SummaryPanel extends JPanel {
 
     private JList playerJList;
     public SummaryPanel(){
+        String title = "Summary";
+        Border border = BorderFactory.createTitledBorder(title);
+        this.setBorder(border);
 
         playerJList = new JList(players);
         playerJList.setCellRenderer(new PlayerCellRenderer());

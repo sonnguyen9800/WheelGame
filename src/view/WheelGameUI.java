@@ -2,6 +2,7 @@ package view;
 
 import view.ControlPanel.ControlPanel;
 import view.Menu.WheelMenuBar;
+import view.StatusBar.StatusBar;
 import view.SummaryPanel.SummaryPanel;
 import view.WheelPanel.WheelPanel;
 
@@ -15,12 +16,25 @@ public class WheelGameUI extends JFrame {
     private WheelGameUI(){
         super("Wheel Game");
 
-        setLayout(new GridLayout());
+        //setLayout(new GridLayout());
+        setLayout(new BorderLayout());
+
+
         setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(new WheelPanel());
-        add(new SummaryPanel());
-        add(new ControlPanel());
+
+        WheelPanel wheelPanel = new WheelPanel();
+        add(wheelPanel, BorderLayout.LINE_START);
+        wheelPanel.setPreferredSize(new Dimension(400,400));
+
+        SummaryPanel summaryPanel = new SummaryPanel();
+        add(summaryPanel, BorderLayout.CENTER);
+        summaryPanel.setPreferredSize(new Dimension(400,400));
+
+        ControlPanel controlPanel = new ControlPanel();
+        add(controlPanel, BorderLayout.EAST);
+        controlPanel.setPreferredSize(new Dimension(400,400));
+        add(new StatusBar(), BorderLayout.SOUTH);
 
         setJMenuBar(new WheelMenuBar());
         setBackground(Color.DARK_GRAY);
