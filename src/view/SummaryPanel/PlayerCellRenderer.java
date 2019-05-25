@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class PlayerCellRenderer extends JLabel implements ListCellRenderer {
-    private static final Color HIGHLIGHT_COLOR = new Color(0, 0, 128);
+    private static final Color HIGHLIGHT_COLOR = new Color(118, 128, 125);
 
     public PlayerCellRenderer() {
         setOpaque(true);
@@ -16,7 +16,8 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value,
                                                   int index, boolean isSelected, boolean cellHasFocus) {
         Player entry = (Player) value;
-        setText(entry.getPlayerName() + entry.getPoints() + entry.getBetType().toString());
+        String dataEntry = "    Player Name: " + entry.getPlayerName() + " Points: " + entry.getPoints() + " Bet: " + entry.getBetType();
+        setText(dataEntry);
 
 
         if (isSelected) {

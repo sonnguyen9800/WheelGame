@@ -13,17 +13,27 @@ public class SummaryPanel extends JPanel {
     private Player players[] = {
             new SimplePlayer("0", "Adam", 1000),
             new SimplePlayer("1", "Eve", 1000),
+            new SimplePlayer("2", "Lilith", 1000),
+            new SimplePlayer("0", "Adam", 1000),
+            new SimplePlayer("1", "Eve", 1000),
+            new SimplePlayer("2", "Lilith", 1000),
+            new SimplePlayer("0", "Adam", 1000),
+            new SimplePlayer("1", "Eve", 1000),
+            new SimplePlayer("2", "Lilith", 1000),
+            new SimplePlayer("0", "Adam", 1000),
+            new SimplePlayer("1", "Eve", 1000),
             new SimplePlayer("2", "Lilith", 1000)
     };
 
 
     private JList playerJList;
     public SummaryPanel(){
-        setBackground(Color.GRAY);
 
         playerJList = new JList(players);
         playerJList.setCellRenderer(new PlayerCellRenderer());
-        playerJList.setVisibleRowCount(4);
+        playerJList.setFixedCellHeight(50);
+        playerJList.setFixedCellWidth(380);
+
         JScrollPane pane = new JScrollPane(playerJList);
 
         add(pane);
