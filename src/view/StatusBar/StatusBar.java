@@ -1,4 +1,4 @@
-package view;
+package view.StatusBar;
 
 import javax.swing.*;
 
