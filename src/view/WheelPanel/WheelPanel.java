@@ -2,6 +2,7 @@ package view.WheelPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,7 +21,6 @@ public class WheelPanel extends JPanel {
             e.printStackTrace();
         }
         setSize(WHEELGAME_WIDTH/3, WHEELGAME_WIDTH/3);
-
         backGroundImage = image.getScaledInstance(this.getWidth(),this.getHeight(),Image.SCALE_SMOOTH);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }

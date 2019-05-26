@@ -7,5 +7,6 @@ public class WheelMenuBar extends JMenuBar {
         add(new MenuItemOption());
         add(new MenuItemNewGame());
         add(new MenuItemRestart());
+        add(new MenuItemHelp());
     }
 }

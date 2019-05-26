@@ -8,9 +8,9 @@ public class SpinPanel extends JPanel {
         setSize(300, 180);
         JButton spin = new JButton();
 
-        spin.setBackground(Color.RED);
 
         spin.setText("SPIN THE WHEEL");
+        spin.setPreferredSize(new Dimension(200,75));
 
         add(spin);
     }
