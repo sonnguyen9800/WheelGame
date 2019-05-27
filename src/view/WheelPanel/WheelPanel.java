@@ -29,6 +29,7 @@ public class WheelPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backGroundImage, 0, 0, this);
+
     }
 
 }

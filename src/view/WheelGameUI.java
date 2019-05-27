@@ -36,7 +36,7 @@ public class WheelGameUI extends JFrame {
         controlPanel.setPreferredSize(new Dimension(400,400));
         add(new StatusBar(), BorderLayout.SOUTH);
 
-        setJMenuBar(new WheelMenuBar());
+        setJMenuBar(new WheelMenuBar(this));
         setBackground(Color.DARK_GRAY);
     }
 
