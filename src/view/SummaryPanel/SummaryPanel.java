@@ -24,6 +24,7 @@ public class SummaryPanel extends JPanel {
 
         playerJList = new JList(players);
         playerJList.setCellRenderer(new PlayerCellRenderer());
+
         playerJList.setFixedCellHeight(50);
         playerJList.setFixedCellWidth(380);
 

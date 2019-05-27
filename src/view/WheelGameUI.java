@@ -24,11 +24,11 @@ public class WheelGameUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         WheelPanel wheelPanel = new WheelPanel();
-        add(wheelPanel, BorderLayout.LINE_START);
+        add(wheelPanel, BorderLayout.CENTER);
         wheelPanel.setPreferredSize(new Dimension(400,400));
 
         SummaryPanel summaryPanel = new SummaryPanel();
-        add(summaryPanel, BorderLayout.CENTER);
+        add(summaryPanel, BorderLayout.WEST);
         summaryPanel.setPreferredSize(new Dimension(400,400));
 
         ControlPanel controlPanel = new ControlPanel();
@@ -38,6 +38,8 @@ public class WheelGameUI extends JFrame {
 
         setJMenuBar(new WheelMenuBar(this));
         setBackground(Color.DARK_GRAY);
+
+        setVisible(true);
     }
 
 
@@ -45,6 +47,6 @@ public class WheelGameUI extends JFrame {
 
     public static void main(String[] args) {
         WheelGameUI wheelGameUI = new WheelGameUI();
-        wheelGameUI.setVisible(true);
+
     }
 }
