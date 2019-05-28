@@ -5,6 +5,7 @@ import model.enumeration.BetType;
 import model.enumeration.Color;
 import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
+import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
 
@@ -18,7 +19,7 @@ import static javax.swing.GroupLayout.Alignment.*;
 public class PlayerEditorPanel extends JPanel {
 
     private Player selectedPlayer = new SimplePlayer("?", "No Player Choosen", 0);
-
+    private Player newPlayer = new SimplePlayer("?", "No Player Created", 0);
     private JLabel playerNameLabel;
     private JLabel playerBetpointLabel;
     private JLabel playerBettypeLabel;
@@ -60,7 +61,59 @@ public class PlayerEditorPanel extends JPanel {
 
         populate(groupLayout);
 
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try{
+                    newPlayer = new SimplePlayer(selectedPlayer.getPlayerId(), playerNameTextfield.getText(),
+                            selectedPlayer.getPoints());
+                    newPlayer.setBetType((BetType) box.getSelectedItem());
 
+                    if (!newPlayer.setBet(Integer.parseInt(playerBetpointTextfield.getText()))){
+                        JOptionPane.showMessageDialog(null, "Your Bet is invalid");
+                    } else{
+                        System.out.println(Integer.parseInt(playerBetpointTextfield.getText()));
+                        System.out.println("New Player created: " + newPlayer.toString());
+                        updatePlayer(selectedPlayer, newPlayer);
+                        GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
+                        gameEngineCallbackGUI.refreshSummaryPanel();
+                    }
+
+                }catch (Exception e){
+                    System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "Error in Input");
+                }
+
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                playerNameTextfield.setText(selectedPlayer.getPlayerName());
+                playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getBet()));
+                box.setSelectedItem(selectedPlayer.getBetType());
+            }
+        });
+
+        destroyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                int n = JOptionPane.showConfirmDialog(
+                        null,
+                        "Would you like to delete this player",
+                        "Need confirmation",
+                        JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.OK_OPTION){
+                    GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
+                    gameEngineCallbackGUI.removePlayer(selectedPlayer);
+                    gameEngineCallbackGUI.refreshSummaryPanel();
+                    gameEngineCallbackGUI.refreshPlayerSelectionPane();
+                }
+
+            }
+        });
 
     }
     public void populate(GroupLayout groupLayout){
@@ -114,5 +167,11 @@ public class PlayerEditorPanel extends JPanel {
         this.selectedPlayer = player;
         //System.out.println(player.toString());
         populate(groupLayout);
+    }
+
+    public void updatePlayer(Player oldPlayer, Player newPlayer){
+        oldPlayer.setPlayerName(newPlayer.getPlayerName());
+        oldPlayer.setBet(newPlayer.getBet());
+        oldPlayer.setBetType(newPlayer.getBetType());
     }
 }

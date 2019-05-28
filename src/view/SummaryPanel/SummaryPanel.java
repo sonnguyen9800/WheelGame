@@ -44,6 +44,14 @@ public class SummaryPanel extends JPanel {
         for (Player player : gameEngineCallbackGUI.getPlayers()){
             listPlayerModel.addElement(player);
         }
+        playerJList = new JList(listPlayerModel);
+        playerJList.setCellRenderer(new PlayerCellRenderer());
+        playerJList.setFixedCellHeight(50);
+        playerJList.setFixedCellWidth(380);
+        JScrollPane pane = new JScrollPane(playerJList);
+
+        add(pane);
+
     }
 
 }

@@ -19,7 +19,7 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
                                                   int index, boolean isSelected, boolean cellHasFocus) {
         Player entry = (Player) value;
         String dataEntry = " ID: " + entry.getPlayerId() + " Player: " + entry.getPlayerName()
-                + "; Points: "
+                + "; Total Points: "
                 + entry.getPoints()
                 + " Bet: " + entry.getBet();
 

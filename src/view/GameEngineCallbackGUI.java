@@ -52,7 +52,17 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         this.selectedPlayer = player;
         this.controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
         logSelectedPlayers();
+    }
 
+    public void removePlayer(Player player){
+        players.remove(player);
+    }
+
+    public void refreshPlayerSelectionPane(){
+        this.controlPanel.getPlayerSelectionPanel().updateComboPlayers();
+    }
+    public void refreshSummaryPanel(){
+        this.summaryPanel.updateListPlayer();
     }
 
     public List<Player> getPlayers(){
