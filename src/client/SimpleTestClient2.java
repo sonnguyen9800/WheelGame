@@ -29,7 +29,7 @@ public class SimpleTestClient2 {
     private static final Logger logger = Logger.getLogger(SimpleTestClient2.class.getName());
 
     public static void main(String[] args) {
-        final GameEngine gameEngine = new GameEngineImpl();
+        final GameEngine gameEngine = GameEngineImpl.getSingletonInstance();
 
         // call method in Validator.jar to test *structural* correctness
         // just passing this does not mean it actually works .. you need to test yourself!
@@ -42,7 +42,7 @@ public class SimpleTestClient2 {
 
         // add logging callback
         gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
-        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI());
+        gameEngine.addGameEngineCallback(GameEngineCallbackGUI.getSingletonInstance());
 
 
         // check the wheel creation is correct by inspecting logs

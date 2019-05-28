@@ -37,7 +37,7 @@ public class ComplexTestClient {
 
 
     public static void main(String[] args) {
-        final GameEngine gameEngine = new GameEngineImpl();
+        final GameEngine gameEngine = GameEngineImpl.getSingletonInstance();
 
         // call method in Validator.jar to test *structural* correctness
         // just passing this does not mean it actually works .. you need to test yourself!

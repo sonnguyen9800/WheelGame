@@ -1,5 +1,6 @@
 package view;
 
+import model.GameEngineImpl;
 import model.interfaces.GameEngine;
 import model.interfaces.Slot;
 import view.ControlPanel.ControlPanel;
@@ -17,9 +18,16 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     public final static int WHEELGAME_WIDTH = 1200;
     public final static int WHEELGAME_HEIGHT = 480;
 
+    private static GameEngineCallback singletonInstance = new GameEngineCallbackGUI();
+
+    public static GameEngineCallback getSingletonInstance()
+    {
+        return singletonInstance;
+    }
+
     private WheelPanel wheelPanel;
 
-    public GameEngineCallbackGUI(){
+    private GameEngineCallbackGUI(){
         super("Wheel Game");
 
         //setLayout(new GridLayout());
@@ -72,5 +80,5 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         this.wheelPanel.paintMovingBall(index);
     }
 
-    
+
 }

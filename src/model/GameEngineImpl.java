@@ -15,6 +15,12 @@ import java.util.Random;
 
 public class GameEngineImpl implements GameEngine {
 
+    private static GameEngine singletonInstance = new GameEngineImpl();
+
+    public static GameEngine getSingletonInstance()
+    {
+        return singletonInstance;
+    }
     //Collection of Slots:
     private static List<Slot> SlotsCollection = iniSlotCollection();
     //Collection of Player:
@@ -22,7 +28,7 @@ public class GameEngineImpl implements GameEngine {
     //Collection of GameEngineCallback
     private Collection<GameEngineCallback> GameEnginesCallBacks;
 
-    public GameEngineImpl() {
+    private GameEngineImpl() {
         GameEnginesCallBacks = new ArrayList<>();
     }
 
