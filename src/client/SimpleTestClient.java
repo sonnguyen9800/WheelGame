@@ -40,7 +40,7 @@ public class SimpleTestClient {
                 new SimplePlayer("2", "The Loser", 750), new SimplePlayer("3", "The Dabbler", 500)};
 
         // add logging callback
-        gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
+        gameEngine.addGameEngineCallback(GameEngineCallbackImpl.getSingletonInstance());
 
         // check the wheel creation is correct by inspecting logs
         logWheel(gameEngine.getWheelSlots());

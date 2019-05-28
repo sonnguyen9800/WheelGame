@@ -1,15 +1,23 @@
 package view.ControlPanel;
 
+import model.SimplePlayer;
 import model.enumeration.Color;
 import model.interfaces.Player;
+import view.GameEngineCallbackGUI;
 
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
 import static javax.swing.GroupLayout.Alignment.*;
 
 public class PlayerEditorPanel extends JPanel {
+
+    private Player selectedPlayer = new SimplePlayer("?", "No Player Choosen", 0);
+
     private JLabel playerNameLabel;
     private JLabel playerBetpointLabel;
     private JLabel playerBettypeLabel;
@@ -24,8 +32,9 @@ public class PlayerEditorPanel extends JPanel {
     private JButton cancelButton;
     private JButton destroyButton;
 
-    public PlayerEditorPanel(Player player){
-        GroupLayout groupLayout = new GroupLayout(this);
+    private GroupLayout groupLayout;
+    public PlayerEditorPanel(){
+        groupLayout = new GroupLayout(this);
         setLayout(groupLayout);
 
 
@@ -34,10 +43,10 @@ public class PlayerEditorPanel extends JPanel {
         playerBettypeLabel = new JLabel("Player Bet Type: ");
 
         playerNameTextfield = new JTextField(10);
-        playerNameTextfield.setText(player.getPlayerName());
-
         playerBetpointTextfield = new JTextField(10);
-        playerBetpointTextfield.setText(String.valueOf(player.getBet()));
+
+        playerNameTextfield.setText(selectedPlayer.getPlayerName());
+        playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getPoints()));
 
 
         okButton = new JButton("Accept");
@@ -48,6 +57,25 @@ public class PlayerEditorPanel extends JPanel {
         colorsBox = new Color[] {Color.RED, Color.BLACK, Color.GREEN0, Color.GREEN00};
         box = new JComboBox<>(colorsBox);
 
+        populate(groupLayout);
+
+
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                setSelectedPlayer(new SimplePlayer("HELLO", "ADAM", new Random().nextInt(100)));
+
+            }
+        });
+
+
+
+
+    }
+    public void populate(GroupLayout groupLayout){
+
+        playerNameTextfield.setText(selectedPlayer.getPlayerName());
+        playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getPoints()));
 
         groupLayout.setAutoCreateGaps(true);
         groupLayout.setAutoCreateContainerGaps(true);
@@ -63,7 +91,7 @@ public class PlayerEditorPanel extends JPanel {
                         .addComponent(box, GroupLayout.DEFAULT_SIZE,
                                 GroupLayout.DEFAULT_SIZE,
                                 GroupLayout.PREFERRED_SIZE)
-                .addGroup(groupLayout.createSequentialGroup())
+                        .addGroup(groupLayout.createSequentialGroup())
                         .addComponent(okButton)
                         .addComponent(cancelButton)
                         .addComponent(destroyButton))
@@ -79,16 +107,19 @@ public class PlayerEditorPanel extends JPanel {
                 .addGroup(groupLayout.createParallelGroup(BASELINE)
                         .addComponent(playerBettypeLabel)
                         .addComponent(box, GroupLayout.DEFAULT_SIZE,
-                        GroupLayout.DEFAULT_SIZE,
-                        GroupLayout.PREFERRED_SIZE))
+                                GroupLayout.DEFAULT_SIZE,
+                                GroupLayout.PREFERRED_SIZE))
                 .addGroup(groupLayout.createSequentialGroup())
-                        .addComponent(okButton)
-                        .addComponent(cancelButton)
-                        .addComponent(destroyButton)
+                .addComponent(okButton)
+                .addComponent(cancelButton)
+                .addComponent(destroyButton)
 
         );
+    }
 
-
-
+    public void setSelectedPlayer(Player player){
+        this.selectedPlayer = player;
+        System.out.println(player.toString());
+        populate(groupLayout);
     }
 }

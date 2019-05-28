@@ -1,7 +1,8 @@
 package view;
 
-import model.GameEngineImpl;
+import model.SimplePlayer;
 import model.interfaces.GameEngine;
+import model.interfaces.Player;
 import model.interfaces.Slot;
 import view.ControlPanel.ControlPanel;
 import view.Menu.WheelMenuBar;
@@ -13,10 +14,14 @@ import view.interfaces.GameEngineCallback;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback {
     public final static int WHEELGAME_WIDTH = 1200;
     public final static int WHEELGAME_HEIGHT = 480;
+
+    private List<Player> players = new ArrayList<Player>();
+    private Player selectedPlayer;
 
     private static GameEngineCallback singletonInstance = new GameEngineCallbackGUI();
 
@@ -26,13 +31,48 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     }
 
     private WheelPanel wheelPanel;
+    private ControlPanel controlPanel;
+    private SummaryPanel summaryPanel;
+    private StatusBar statusBar;
+    private WheelMenuBar wheelMenuBar;
 
     private GameEngineCallbackGUI(){
         super("Wheel Game");
+        populate();
+    }
 
+    public void createNewPlayer(Player player){
+        players.add(player);
+        summaryPanel.addnewPlayer(player);
+    }
+
+    public void setSelectedPlayer(Player player){
+        this.selectedPlayer = player;
+        controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
+    }
+
+    public List<Player> getPlayers(){
+        return this.players;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                //GameEngineCallbackGUI.getSingletonInstance();
+            }
+        });
+    }
+
+
+    public void populate(){
         //setLayout(new GridLayout());
         setLayout(new BorderLayout());
 
+        players.add(new SimplePlayer("1", "John", 10));
+        players.add(new SimplePlayer("1", "John", 10));
 
         setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -41,27 +81,22 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         add(wheelPanel, BorderLayout.CENTER);
         wheelPanel.setPreferredSize(new Dimension(400,400));
 
-        SummaryPanel summaryPanel = new SummaryPanel();
+        summaryPanel = new SummaryPanel();
         add(summaryPanel, BorderLayout.WEST);
         summaryPanel.setPreferredSize(new Dimension(400,400));
 
-        ControlPanel controlPanel = new ControlPanel();
+        controlPanel = new ControlPanel(this);
         add(controlPanel, BorderLayout.EAST);
         controlPanel.setPreferredSize(new Dimension(400,400));
-        add(new StatusBar(), BorderLayout.SOUTH);
 
-        setJMenuBar(new WheelMenuBar(this));
+        statusBar = new StatusBar();
+        add(statusBar, BorderLayout.SOUTH);
+
+        wheelMenuBar = new WheelMenuBar(this);
+        setJMenuBar(wheelMenuBar);
+
         setBackground(Color.DARK_GRAY);
-
         setVisible(true);
-    }
-
-
-
-
-    public static void main(String[] args) {
-        GameEngineCallbackGUI gameEngineCallbackGUI = new GameEngineCallbackGUI();
-
     }
 
     @Override

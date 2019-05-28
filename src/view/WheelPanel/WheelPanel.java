@@ -3,13 +3,16 @@ package view.WheelPanel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
-public class WheelPanel extends JPanel implements MouseListener {
+public class WheelPanel extends JPanel  {
 
     private BufferedImage image;
     private Image backGroundImage;
@@ -23,11 +26,20 @@ public class WheelPanel extends JPanel implements MouseListener {
         }
         setSize(400, 400);
         setPreferredSize(new Dimension(400, 400));
-        System.out.println(this.getWidth() + " " + this.getHeight());
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        addMouseListener(this);
+        JButton jButton = new JButton("Click Me");
+        add(jButton);
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Random random = new Random();
+                int randomnum= random.nextInt(37);
+                paintMovingBall(randomnum);
+            }
+        });
+
     }
 
     private void setTime(int time){
@@ -38,7 +50,6 @@ public class WheelPanel extends JPanel implements MouseListener {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-
         double scaleFactor = Math.min(1d, getScaleFactorToFit(new Dimension(image.getWidth(), image.getHeight()), getSize()));
         //TRUE WIDTH AND HEIGHT
         int scaleWidth = (int) Math.round(image.getWidth() * scaleFactor);
@@ -55,9 +66,8 @@ public class WheelPanel extends JPanel implements MouseListener {
         g.drawImage(scaled, x, y, this);
 
         paintBall(g, width, scaleWidth, scaleHeight, x, y, time);
-
+        System.out.println("OK");
     }
-
 
     private void paintBall(Graphics g, int width, int scaleWidth, int scaleHeight, int x, int y, int time){
         Graphics2D g2d = (Graphics2D)g;
@@ -74,33 +84,10 @@ public class WheelPanel extends JPanel implements MouseListener {
 
     public void paintMovingBall(int timeInput){
         setTime(timeInput);
-        this.repaint();
+        repaint();
         System.out.println();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
 
 
     public double getScaleFactorToFit(Dimension original, Dimension toFit) {

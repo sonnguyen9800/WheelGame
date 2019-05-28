@@ -1,45 +1,43 @@
 package view.SummaryPanel;
 
-import model.SimplePlayer;
-import model.enumeration.BetType;
+
 import model.interfaces.Player;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class SummaryPanel extends JPanel {
-    private Player players[] ;
+    //public Player players[] ;
+
+    private DefaultListModel<Player> listPlayerModel = new DefaultListModel<Player>();
+    public JList playerJList;
 
 
-    private JList playerJList;
     public SummaryPanel(){
         String title = "Summary";
         Border border = BorderFactory.createTitledBorder(title);
         this.setBorder(border);
 
-        players = updatePlayers();
+       // players = updatePlayers();
 
-        playerJList = new JList(players);
+        playerJList = new JList(listPlayerModel);
         playerJList.setCellRenderer(new PlayerCellRenderer());
 
         playerJList.setFixedCellHeight(50);
         playerJList.setFixedCellWidth(380);
+//        playerJList.addListSelectionListener(new SummaryJlistListener());
 
         JScrollPane pane = new JScrollPane(playerJList);
 
         add(pane);
 
-
     }
 
-    private Player[] updatePlayers() {
-        Player array[] = {
-
-        };
-        return array;
+    public void addnewPlayer(Player player) {
+        if (player != null){
+            this.listPlayerModel.addElement(player);
+        }
     }
 
 }

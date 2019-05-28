@@ -1,6 +1,7 @@
 package view.SummaryPanel;
 
 import model.interfaces.Player;
+import view.GameEngineCallbackGUI;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -8,7 +9,7 @@ import java.awt.*;
 
 class PlayerCellRenderer extends JLabel implements ListCellRenderer {
     private static final Color HIGHLIGHT_COLOR = new Color(118, 128, 125);
-
+    private GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
     public PlayerCellRenderer() {
         setOpaque(true);
         setIconTextGap(12);
@@ -17,7 +18,7 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value,
                                                   int index, boolean isSelected, boolean cellHasFocus) {
         Player entry = (Player) value;
-        String dataEntry = "    Player: " + entry.getPlayerName()
+        String dataEntry = " ID: " + entry.getPlayerId() + " Player: " + entry.getPlayerName()
                 + "; Points: "
                 + entry.getPoints()
                 + " Bet: " + entry.getBet();

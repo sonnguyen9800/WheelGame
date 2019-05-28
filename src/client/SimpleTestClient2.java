@@ -10,7 +10,9 @@ import validate.Validator;
 import view.GameEngineCallbackGUI;
 import view.GameEngineCallbackImpl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,21 +29,15 @@ import java.util.logging.Logger;
  */
 public class SimpleTestClient2 {
     private static final Logger logger = Logger.getLogger(SimpleTestClient2.class.getName());
-
+    private static List<Player> players = new ArrayList<>();
     public static void main(String[] args) {
         final GameEngine gameEngine = GameEngineImpl.getSingletonInstance();
 
         // call method in Validator.jar to test *structural* correctness
         // just passing this does not mean it actually works .. you need to test yourself!
         // pass false if you want to show minimal logging (pass/fail) .. (i.e. ONLY once it passes)
-        Validator.validate(true);
 
-        // create some test players
-        Player[] players = new Player[]{new SimplePlayer("1", "Come In Spinner", 1000),
-                new SimplePlayer("2", "The Loser", 750), new SimplePlayer("3", "The Dabbler", 500)};
-
-        // add logging callback
-        gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
+        gameEngine.addGameEngineCallback(GameEngineCallbackImpl.getSingletonInstance());
         gameEngine.addGameEngineCallback(GameEngineCallbackGUI.getSingletonInstance());
 
 
@@ -49,21 +45,20 @@ public class SimpleTestClient2 {
         logWheel(gameEngine.getWheelSlots());
 
         // main loop to add players and place a bet
-        int enumOrdinal = 0;
-
-        for (Player player : players) {
-            gameEngine.addPlayer(player);
-            // mod with BetType length so we always stay in range even if num players increases
-            // NOTE: we are passing a different BetType each time!
-            gameEngine.placeBet(player, 100, BetType.values()[enumOrdinal++ % BetType
-                    .values().length]);
-        }
+//
+//        for (Player player : players) {
+//            gameEngine.addPlayer(player);
+//            // mod with BetType length so we always stay in range even if num players increases
+//            // NOTE: we are passing a different BetType each time!
+//            gameEngine.placeBet(player, 100, BetType.values()[enumOrdinal++ % BetType
+//                    .values().length]);
+//        }
 
        // logger.log(Level.INFO, "SPINNING ...");
         // NOTE: result logging is done via GameEngineCallback.result()
         // after it calls GameEngine.calculateResult())
         // OutputTrace.txt was generated with these parameter values
-        //gameEngine.spin(1, 500, 25);
+        gameEngine.spin(1, 500, 25);
     }
 
     // private helper method to log wheel slots
