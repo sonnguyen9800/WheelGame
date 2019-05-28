@@ -59,11 +59,11 @@ public class SimpleTestClient2 {
                     .values().length]);
         }
 
-        logger.log(Level.INFO, "SPINNING ...");
+       // logger.log(Level.INFO, "SPINNING ...");
         // NOTE: result logging is done via GameEngineCallback.result()
         // after it calls GameEngine.calculateResult())
         // OutputTrace.txt was generated with these parameter values
-        gameEngine.spin(1, 1000, 20);
+        //gameEngine.spin(1, 500, 25);
     }
 
     // private helper method to log wheel slots
