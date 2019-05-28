@@ -37,18 +37,7 @@ public class SummaryPanel extends JPanel {
 
     private Player[] updatePlayers() {
         Player array[] = {
-                new SimplePlayer("0", "Adam", 1000),
-                new SimplePlayer("1", "Eve", 1000),
-                new SimplePlayer("2", "Lilith", 1000),
-                new SimplePlayer("0", "Adam", 1000),
-                new SimplePlayer("1", "Eve", 1000),
-                new SimplePlayer("2", "Lilith", 1000),
-                new SimplePlayer("0", "Adam", 1000),
-                new SimplePlayer("1", "Eve", 1000),
-                new SimplePlayer("2", "Lilith", 1000),
-                new SimplePlayer("0", "Adam", 1000),
-                new SimplePlayer("1", "Eve", 1000),
-                new SimplePlayer("2", "Lilith", 1000)
+
         };
         return array;
     }

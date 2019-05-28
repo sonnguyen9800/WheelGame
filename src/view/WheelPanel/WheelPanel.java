@@ -2,21 +2,18 @@ package view.WheelPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
-
-import static view.WheelGameUI.WHEELGAME_WIDTH;
 
 public class WheelPanel extends JPanel implements MouseListener {
+
     private BufferedImage image;
     private Image backGroundImage;
-    int time = 1;
+    int time = 0;
 
     public WheelPanel() {
         try {
@@ -27,57 +24,62 @@ public class WheelPanel extends JPanel implements MouseListener {
         setSize(400, 400);
         setPreferredSize(new Dimension(400, 400));
         System.out.println(this.getWidth() + " " + this.getHeight());
-        backGroundImage = image.getScaledInstance(this.getWidth(),this.getHeight(),Image.SCALE_SMOOTH);
-//        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        JButton jButton = new JButton("Click Me");
-        jButton.addMouseListener(this);
-        add(jButton);
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         addMouseListener(this);
     }
 
-
+    private void setTime(int time){
+        this.time = time;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
+
         super.paintComponent(g);
-        backGroundImage = image.getScaledInstance(this.getWidth(),this.getHeight(),Image.SCALE_SMOOTH);
-        g.drawImage(backGroundImage, 0, 0, this);
 
-//        System.out.println("MAX X: " + this.getHeight());
-//        System.out.println("MAX Y: " + this.getWidth());
-        Graphics2D g2d = (Graphics2D)g;
+        double scaleFactor = Math.min(1d, getScaleFactorToFit(new Dimension(image.getWidth(), image.getHeight()), getSize()));
+        //TRUE WIDTH AND HEIGHT
+        int scaleWidth = (int) Math.round(image.getWidth() * scaleFactor);
+        int scaleHeight = (int) Math.round(image.getHeight() * scaleFactor);
 
-        g2d.setPaint(new Color(243, 255, 53));
-        int trueWidth = this.getWidth();
-        int trueHeight = this.getHeight()-6;
-        double x = trueWidth/2 - 20 + (trueWidth/2)*Math.cos(0.16528268*time) ;
-        double y = trueHeight/2 + (trueHeight/2)*Math.sin(0.16528268*time) ;
+        Image scaled = image.getScaledInstance(scaleWidth, scaleHeight, Image.SCALE_SMOOTH);
 
-        int sizeOval = 20;
-        System.out.println("Location of Ball: " + (int)x + ":"+ (int)y);
-        System.out.println("True Width: " + trueWidth + ":"+ trueHeight);
+        int width = getWidth() - 1;
+        int height = getHeight() - 1;
 
-//        g2d.fillOval(this.getWidth()/2 - sizeOval/2,this.getHeight()/2 - sizeOval/2,
-//                sizeOval, sizeOval);
-        g2d.fillOval((int)x,(int)y,
-                sizeOval, sizeOval);
+        int x = (width - scaled.getWidth(this)) / 2;
+        int y = (height - scaled.getHeight(this)) / 2;
 
-        g2d.setBackground(Color.RED);
+        g.drawImage(scaled, x, y, this);
+
+        paintBall(g, width, scaleWidth, scaleHeight, x, y, time);
+
     }
 
-    protected void paintMovingBall(){
+
+    private void paintBall(Graphics g, int width, int scaleWidth, int scaleHeight, int x, int y, int time){
+        Graphics2D g2d = (Graphics2D)g;
+        int sizeOval = width/30;
+        g2d.setPaint(new Color(243, 255, 53));
+
+        double rad = Math.PI/2 - (Math.PI*time)/19;
+
+        int ballX = x + scaleWidth/2 - sizeOval/2 + (int)((scaleWidth/2)*Math.cos(rad));
+        int ballY = y + scaleHeight/2 - (int)((scaleHeight/2)*Math.sin(rad)) - sizeOval/2;
+        g2d.fillOval(ballX,ballY, sizeOval, sizeOval);
+    }
+
+
+    public void paintMovingBall(int timeInput){
+        setTime(timeInput);
         this.repaint();
         System.out.println();
     }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-
-        this.paintMovingBall();
-        time+=1;
-        System.out.println("Location Mouse Clicked: " + mouseEvent.getX() + ":" + mouseEvent.getY());
     }
 
     @Override
@@ -99,4 +101,39 @@ public class WheelPanel extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent mouseEvent) {
 
     }
+
+
+    public double getScaleFactorToFit(Dimension original, Dimension toFit) {
+
+        double dScale = 1d;
+
+        if (original != null && toFit != null) {
+
+            double dScaleWidth = getScaleFactor(original.width, toFit.width);
+            double dScaleHeight = getScaleFactor(original.height, toFit.height);
+
+            dScale = Math.min(dScaleHeight, dScaleWidth);
+
+        }
+
+        return dScale;
+    }
+    public double getScaleFactor(int iMasterSize, int iTargetSize) {
+
+        double dScale = 1;
+        if (iMasterSize > iTargetSize) {
+
+            dScale = (double) iTargetSize / (double) iMasterSize;
+
+        } else {
+
+            dScale = (double) iTargetSize / (double) iMasterSize;
+
+        }
+
+        return dScale;
+
+    }
 }
+
+

@@ -5,6 +5,7 @@ import model.enumeration.Color;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
+import view.GameEngineCallbackGUI;
 import view.interfaces.GameEngineCallback;
 
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ public class GameEngineImpl implements GameEngine {
         SlotsCo.add(new SlotImpl(0, Color.GREEN00, 0));
         int[] red = {27, 25, 12, 19, 18, 21, 16, 23, 14, 9, 30, 7, 32, 5, 34, 3, 36, 1};
         int[] black = {10, 29, 8, 31, 6, 33, 4, 35, 2, 28, 26, 11, 20, 17, 22, 15, 24, 13};
-
-
         int num = 1;
         int redLeft = 0;
         int blackLeft = 0;
@@ -96,6 +95,9 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         Slot nextSlot = randomlySelectASlot(SlotsCollection);
+        for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
+            gameEngineCallback.nextSlot(nextSlot, this);
+        }
 
         while (initialDelay < (finalDelay - delayIncrement)) {
             try {
@@ -112,10 +114,11 @@ public class GameEngineImpl implements GameEngine {
 
         }
         Slot lastSlot = moveToNextSlot(nextSlot, SlotsCollection);
-        this.calculateResult(lastSlot);
+
         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
             gameEngineCallback.result(lastSlot, this);
         }
+        this.calculateResult(lastSlot);
 
     }
 

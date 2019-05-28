@@ -1,19 +1,25 @@
 package view;
 
+import model.interfaces.GameEngine;
+import model.interfaces.Slot;
 import view.ControlPanel.ControlPanel;
 import view.Menu.WheelMenuBar;
 import view.StatusBar.StatusBar;
 import view.SummaryPanel.SummaryPanel;
 import view.WheelPanel.WheelPanel;
+import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class WheelGameUI extends JFrame {
+public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback {
     public final static int WHEELGAME_WIDTH = 1200;
     public final static int WHEELGAME_HEIGHT = 480;
 
-    private WheelGameUI(){
+    private WheelPanel wheelPanel;
+
+    public GameEngineCallbackGUI(){
         super("Wheel Game");
 
         //setLayout(new GridLayout());
@@ -23,7 +29,7 @@ public class WheelGameUI extends JFrame {
         setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        WheelPanel wheelPanel = new WheelPanel();
+        wheelPanel = new WheelPanel();
         add(wheelPanel, BorderLayout.CENTER);
         wheelPanel.setPreferredSize(new Dimension(400,400));
 
@@ -46,7 +52,24 @@ public class WheelGameUI extends JFrame {
 
 
     public static void main(String[] args) {
-        WheelGameUI wheelGameUI = new WheelGameUI();
+        GameEngineCallbackGUI gameEngineCallbackGUI = new GameEngineCallbackGUI();
 
     }
+
+    @Override
+    public void nextSlot(Slot slot, GameEngine engine) {
+        int index = 0;
+        ArrayList list = new ArrayList(engine.getWheelSlots());
+        index = list.indexOf(slot);
+        this.wheelPanel.paintMovingBall(index);
+    }
+
+    @Override
+    public void result(Slot winningSlot, GameEngine engine) {
+        int index = 0;
+        ArrayList list = new ArrayList(engine.getWheelSlots());
+        index = list.indexOf(winningSlot);
+        this.wheelPanel.paintMovingBall(index);
+    }
+
 }
