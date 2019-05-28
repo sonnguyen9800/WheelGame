@@ -13,12 +13,6 @@ public class PlayerNewDialog extends JDialog {
         JTextField playerName = new JTextField();
         JTextField playerIniPoint = new JTextField();
 
-        if (gameEngineCallbackGUI == null){
-            playerID.setText("NUL");
-        }else{
-            playerID.setText("NOT NULL");
-        }
-
         final JComponent[] inputs = new JComponent[] {
                 new JLabel("Player ID"),
                 playerID,
@@ -30,15 +24,16 @@ public class PlayerNewDialog extends JDialog {
         };
         int result = JOptionPane.showConfirmDialog(null, inputs, "My new Player", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
-            try{
-                SimplePlayer simplePlayer = new SimplePlayer(playerID.getText(),
-                        playerName.getText(),
-                        Integer.parseInt(playerIniPoint.getText()));
-                System.out.println(simplePlayer.toString());
-                gameEngineCallbackGUI.createNewPlayer(simplePlayer);
-            }catch (Exception e){
-                System.out.println(e);
-            }
+//            try{
+//                SimplePlayer simplePlayer = new SimplePlayer(playerID.getText(), playerName.getText(), Integer.parseInt(playerIniPoint.getText()));
+//                System.out.println(simplePlayer.toString());
+//                gameEngineCallbackGUI.createNewPlayer(simplePlayer);
+//            }catch (Exception e){
+//                System.out.println("LOL :" + e);
+//            }
+            SimplePlayer simplePlayer = new SimplePlayer(playerID.getText(), playerName.getText(), Integer.parseInt(playerIniPoint.getText()));
+            System.out.println(simplePlayer.toString());
+            gameEngineCallbackGUI.createNewPlayer(simplePlayer);
 
         } else {
 //            System.out.println("User canceled / closed the dialog, result = " + result);

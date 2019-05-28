@@ -1,6 +1,7 @@
 package view.ControlPanel;
 
 import model.SimplePlayer;
+import model.enumeration.BetType;
 import model.enumeration.Color;
 import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
@@ -26,7 +27,7 @@ public class PlayerEditorPanel extends JPanel {
     private JTextField playerBetpointTextfield;
 
     private JComboBox box;
-    private Color[] colorsBox;
+    private BetType[] colorsBox;
 
     private JButton okButton;
     private JButton cancelButton;
@@ -46,7 +47,7 @@ public class PlayerEditorPanel extends JPanel {
         playerBetpointTextfield = new JTextField(10);
 
         playerNameTextfield.setText(selectedPlayer.getPlayerName());
-        playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getPoints()));
+        playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getBet()));
 
 
         okButton = new JButton("Accept");
@@ -54,20 +55,10 @@ public class PlayerEditorPanel extends JPanel {
         cancelButton = new JButton("Cancel/Reset");
         destroyButton = new JButton("Remove Player");
 
-        colorsBox = new Color[] {Color.RED, Color.BLACK, Color.GREEN0, Color.GREEN00};
-        box = new JComboBox<>(colorsBox);
+        colorsBox = new BetType[] {BetType.RED, BetType.BLACK, BetType.ZEROS};
+        box = new JComboBox<BetType>(colorsBox);
 
         populate(groupLayout);
-
-
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                setSelectedPlayer(new SimplePlayer("HELLO", "ADAM", new Random().nextInt(100)));
-
-            }
-        });
-
 
 
 
@@ -75,7 +66,9 @@ public class PlayerEditorPanel extends JPanel {
     public void populate(GroupLayout groupLayout){
 
         playerNameTextfield.setText(selectedPlayer.getPlayerName());
-        playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getPoints()));
+        playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getBet()));
+
+        box.setSelectedItem(selectedPlayer.getBetType());
 
         groupLayout.setAutoCreateGaps(true);
         groupLayout.setAutoCreateContainerGaps(true);
@@ -119,7 +112,7 @@ public class PlayerEditorPanel extends JPanel {
 
     public void setSelectedPlayer(Player player){
         this.selectedPlayer = player;
-        System.out.println(player.toString());
+        //System.out.println(player.toString());
         populate(groupLayout);
     }
 }

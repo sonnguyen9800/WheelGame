@@ -44,11 +44,15 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     public void createNewPlayer(Player player){
         players.add(player);
         summaryPanel.addnewPlayer(player);
+        controlPanel.getPlayerSelectionPanel().updateComboPlayers();
+        logAllPlayers();
     }
 
     public void setSelectedPlayer(Player player){
         this.selectedPlayer = player;
-        controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
+        this.controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
+        logSelectedPlayers();
+
     }
 
     public List<Player> getPlayers(){
@@ -72,14 +76,14 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         setLayout(new BorderLayout());
 
         players.add(new SimplePlayer("1", "John", 10));
-        players.add(new SimplePlayer("1", "John", 10));
+        players.add(new SimplePlayer("1", "Joh423", 10));
 
         setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        wheelPanel = new WheelPanel();
-        add(wheelPanel, BorderLayout.CENTER);
-        wheelPanel.setPreferredSize(new Dimension(400,400));
+//        wheelPanel = new WheelPanel();
+//        add(wheelPanel, BorderLayout.CENTER);
+//        wheelPanel.setPreferredSize(new Dimension(400,400));
 
         summaryPanel = new SummaryPanel();
         add(summaryPanel, BorderLayout.WEST);
@@ -115,5 +119,18 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         this.wheelPanel.paintMovingBall(index);
     }
 
+    public void logAllPlayers(){
+        System.out.println("All Players: ");
+        for (Player player : players){
+            System.out.println(player.toString());
+        }
+    }
+    public void logSelectedPlayers(){
+        if (selectedPlayer != null){
+            System.out.println("Selected:" + selectedPlayer.toString());
+        }else{
+            System.out.println("Null");
+        }
+    }
 
 }

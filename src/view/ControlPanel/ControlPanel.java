@@ -1,4 +1,5 @@
 package view.ControlPanel;
+import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
 
 import javax.swing.*;
@@ -6,6 +7,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class ControlPanel extends JPanel {
+    private Player selectedPlayer;
     private PlayerEditorPanel playerEditorPanel = new PlayerEditorPanel();
     private PlayerSelectionPanel playerSelectionPanel;
     private SpinPanel spinPanel = new SpinPanel();
@@ -25,4 +27,8 @@ public class ControlPanel extends JPanel {
     public PlayerEditorPanel getPlayerEditorPanel(){
         return this.playerEditorPanel;
     }
+    public PlayerSelectionPanel getPlayerSelectionPanel(){
+        return this.playerSelectionPanel;
+    }
+
 }

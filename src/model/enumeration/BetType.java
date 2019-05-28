@@ -45,7 +45,6 @@ public enum BetType {
             } else {
                 player.setPoints(player.getPoints() - player.getBet());
             }
-
         }
     },
     ;
