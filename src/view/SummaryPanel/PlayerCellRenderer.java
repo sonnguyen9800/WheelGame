@@ -39,12 +39,6 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
         Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
         setBorder(border);
 
-        if (isSelected) {
-            setBackground(HIGHLIGHT_COLOR);
-            setForeground(Color.white);
-        }else {
-            setForeground(Color.BLACK);
-        }
         return this;
     }
 }

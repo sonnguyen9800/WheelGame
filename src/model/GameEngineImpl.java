@@ -5,6 +5,7 @@ import model.enumeration.Color;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
+import view.GameEngineCallbackGUI;
 import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
@@ -95,40 +96,78 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
+        boolean GUIexist = false;
+
+
         GameEngineImpl gameEngineRef = this;
         Slot firstSlot = randomlySelectASlot(SlotsCollection);
         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
             gameEngineCallback.nextSlot(firstSlot, this);
+            if (gameEngineCallback instanceof GameEngineCallbackGUI){
+                GUIexist = true;
+            }
+        }
+        if (GUIexist){
+            Timer timer = new Timer(initialDelay, null);
+            timer.addActionListener(new ActionListener() {
+                Slot nextSlot = firstSlot;
+                int delay = initialDelay;
+                GameEngineImpl gameEngine = gameEngineRef;
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    if (delay < (finalDelay-delayIncrement)){
+                        nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
+                        for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
+                            gameEngineCallback.nextSlot(nextSlot, gameEngine );
+                        }
+                        timer.setDelay(delay += delayIncrement);
+                    } else{
+                        nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
+
+                        gameEngine.calculateResult(nextSlot);
+                        for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
+                            gameEngineCallback.result(nextSlot, gameEngine );
+                        }
+                        for (Player player: getAllPlayers()){
+                            player.resetBet();
+                        }
+                        timer.stop();
+                    }
+
+                }
+            });
+            timer.start();
         }
 
-        Timer timer = new Timer(initialDelay, null);
-        timer.addActionListener(new ActionListener() {
+        if (!GUIexist){
+            //int delay = initialDelay;
             Slot nextSlot = firstSlot;
-            int delay = initialDelay;
-            GameEngineImpl gameEngine = gameEngineRef;
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (delay < (finalDelay-delayIncrement)){
-                    nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
-                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-                        gameEngineCallback.nextSlot(nextSlot, gameEngine );
-                    }
-                    timer.setDelay(delay += delayIncrement);
-                } else{
-                    nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
-                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-                        gameEngineCallback.result(nextSlot, gameEngine );
-                    }
-                    gameEngine.calculateResult(nextSlot);
-                    for (Player player: getAllPlayers()){
-                        player.resetBet();
-                    }
-                    timer.stop();
-                }
 
+            for (int delay = initialDelay; delay <= finalDelay; delay+= delayIncrement ){
+                nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
+
+                delay += delayIncrement;
+                if (delay < (finalDelay - delayIncrement)){
+                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
+                        gameEngineCallback.nextSlot(nextSlot, this);
+                    }
+                }else{
+                    this.calculateResult(nextSlot);
+                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
+                        gameEngineCallback.result(nextSlot, this);
+                    }
+                }
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        });
-        timer.start();
+
+
+        }
+
+
 
     }
 

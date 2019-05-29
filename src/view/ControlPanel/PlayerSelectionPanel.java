@@ -11,7 +11,6 @@ public class PlayerSelectionPanel extends JPanel {
     private JComboBox<String> comboPlayers = new JComboBox<>();
     private GameEngineCallbackGUI gameEngineCallbackGUI ;
 
-
     public PlayerSelectionPanel(GameEngineCallbackGUI gameEngineCallbackGUI){
         super();
         this.gameEngineCallbackGUI = gameEngineCallbackGUI;

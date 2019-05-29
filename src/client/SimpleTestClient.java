@@ -7,6 +7,7 @@ import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
 import validate.Validator;
+import view.GameEngineCallbackGUI;
 import view.GameEngineCallbackImpl;
 
 import java.util.Collection;
@@ -33,7 +34,7 @@ public class SimpleTestClient {
         // call method in Validator.jar to test *structural* correctness
         // just passing this does not mean it actually works .. you need to test yourself!
         // pass false if you want to show minimal logging (pass/fail) .. (i.e. ONLY once it passes)
-        Validator.validate(true);
+//        Validator.validate(true);
 
         // create some test players
         Player[] players = new Player[]{new SimplePlayer("1", "Come In Spinner", 1000),

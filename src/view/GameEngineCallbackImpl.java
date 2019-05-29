@@ -1,6 +1,7 @@
 package view;
 
 import model.interfaces.GameEngine;
+import model.interfaces.Player;
 import model.interfaces.Slot;
 import view.interfaces.GameEngineCallback;
 
@@ -27,14 +28,24 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
         // intermediate results logged at Level.FINE
-        logger.log(FINE, "Next Slot " + slot.toString());
+        logger.log(INFO, "Next Slot " + slot.toString());
 
     }
 
     @Override
     public void result(Slot result, GameEngine engine) {
         // final results logged at Level.INFO
-        logger.log(INFO, "Result: " + result.toString());
+        logger.log(INFO, "RESULT="+result.toString() + "\n");
+        logger.log(INFO, "FINAL PLAYER POINT BALANCES");
 
+        String mess = "\n";
+        for (Player player : engine.getAllPlayers()){
+            mess = mess.concat(player.toString());
+            mess = mess.concat("\n");
+        }
+        logger.log(INFO, "" + mess);
+//Player: id=1, name=Come In Spinner, bet=100, betType=RED, points=1100
+//Player: id=2, name=The Loser, bet=100, betType=BLACK, points=650
+//Player: id=3, name=The Dabbler, bet=100, betType=ZEROS, points=400
     }
 }
