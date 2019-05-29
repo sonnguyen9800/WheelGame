@@ -14,9 +14,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Main UI
- *
+ * <p>
  * It contains 5 Panel:
  * 1) WheelPanel (Center)
  * 2) SummaryPanel (Left)
@@ -37,7 +38,7 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     private StatusBar statusBar;
     private GameEngine gameEngine;
 
-    public GameEngineCallbackGUI(GameEngine gameEngine){
+    public GameEngineCallbackGUI(GameEngine gameEngine) {
         super("Wheel Game");
         setLayout(new BorderLayout());
         this.gameEngine = gameEngine;
@@ -47,15 +48,15 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
 
         wheelPanel = new WheelPanel();
         add(wheelPanel, BorderLayout.CENTER);
-        wheelPanel.setPreferredSize(new Dimension(400,400));
+        wheelPanel.setPreferredSize(new Dimension(400, 400));
 
         summaryPanel = new SummaryPanel(this);
         add(summaryPanel, BorderLayout.WEST);
-        summaryPanel.setPreferredSize(new Dimension(400,400));
+        summaryPanel.setPreferredSize(new Dimension(400, 400));
 
         controlPanel = new ControlPanel(this, gameEngine);
         add(controlPanel, BorderLayout.EAST);
-        controlPanel.setPreferredSize(new Dimension(400,400));
+        controlPanel.setPreferredSize(new Dimension(400, 400));
 
         statusBar = new StatusBar();
         add(statusBar, BorderLayout.SOUTH);
@@ -76,7 +77,7 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
      * @author SonNg 3634703
      */
 
-    public void createNewPlayer(Player player){
+    public void createNewPlayer(Player player) {
         gameEngine.addPlayer(player);
         summaryPanel.addnewPlayer(player);
         controlPanel.getPlayerSelectionPanel().updateComboPlayers();
@@ -86,21 +87,21 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
      * set a Selected player, this player is interacted and updated inside ControlPanel
      */
 
-    public void setSelectedPlayer(Player player){
+    public void setSelectedPlayer(Player player) {
         this.controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
     }
 
     /**
      * Remove a Player and update the changes to the SummaryPanel and ControlPanel
      */
-    public void removePlayer(Player player){
+    public void removePlayer(Player player) {
         gameEngine.removePlayer(player);
     }
 
     /**
      * Reload the PlayerSelectionPanel and PlayerEditorPanel inside ControlPanel
      */
-    public void refreshPlayerSelectionPane(){
+    public void refreshPlayerSelectionPane() {
         this.controlPanel.getPlayerSelectionPanel().updateComboPlayers();
         this.controlPanel.getPlayerEditorPanel().refreshEditorPanel();
     }
@@ -108,15 +109,16 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     /**
      * Reload the Summary Panel
      */
-    public void refreshSummaryPanel(){
+    public void refreshSummaryPanel() {
         this.summaryPanel.updateListPlayer();
 
 
     }
+
     /**
      * Get All current Playes
      */
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return (List<Player>) gameEngine.getAllPlayers();
     }
 
@@ -147,9 +149,8 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     /**
      * called when the wheel has stopped spinning<br>
      *
-     *
      * @param winningSlot- the slot that the ball landed in
-     * @param engine      - a convenience reference to the engine so the receiver can call methods if necessary
+     * @param engine       - a convenience reference to the engine so the receiver can call methods if necessary
      * @see model.interfaces.GameEngine
      */
     @Override
@@ -172,7 +173,6 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         statusBar.setMessage("New Result Updated");
 
     }
-
 
 
 }

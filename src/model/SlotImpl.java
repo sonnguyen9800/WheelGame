@@ -4,9 +4,11 @@ import model.enumeration.Color;
 import model.interfaces.Slot;
 
 import java.util.Objects;
+
 /**
  * SlotImp,
  * implements Slot
+ *
  * @see Slot
  */
 public class SlotImpl implements Slot {

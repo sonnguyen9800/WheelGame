@@ -1,13 +1,15 @@
 package view.SummaryPanel;
 
 import model.interfaces.Player;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+
 /**
  * This ListCellRenderer helps to draw each Player on the SummaryPanel
- * @see SummaryPanel for more information
  *
+ * @see SummaryPanel for more information
  */
 
 class PlayerCellRenderer extends JLabel implements ListCellRenderer {
@@ -15,10 +17,12 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
         setOpaque(true);
         setIconTextGap(12);
     }
+
     /**
      * This ListCellRenderer helps to draw each Player on the SummaryPanel
-     * @see SummaryPanel for more information
+     *
      * @param value is the choosen one
+     * @see SummaryPanel for more information
      */
     public Component getListCellRendererComponent(JList list, Object value,
                                                   int index, boolean isSelected, boolean cellHasFocus) {
@@ -35,7 +39,7 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
          * @see SummaryPanel for more information
          *
          */
-        switch (entry.getBetType()){
+        switch (entry.getBetType()) {
             case BLACK:
                 setBackground(Color.GRAY);
                 break;
@@ -45,9 +49,9 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
             case ZEROS:
                 setBackground(Color.GREEN);
                 break;
-                default:
-                    setBackground(Color.WHITE);
-                    break;
+            default:
+                setBackground(Color.WHITE);
+                break;
         }
         Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
         setBorder(border);

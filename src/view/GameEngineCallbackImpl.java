@@ -8,7 +8,6 @@ import view.interfaces.GameEngineCallback;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 
 /**
@@ -40,23 +39,24 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
         logger.log(INFO, "Next Slot " + slot.toString());
 
     }
+
     /**
      * called when the wheel has stopped spinning<br>
      * this is a convenient place to call {@link GameEngine#calculateResult(Slot winningSlot)}<br>
      * and {@link Player#resetBet()}
      *
      * @param result- the slot that the ball landed in
-     * @param engine      - a convenience reference to the engine so the receiver can call methods if necessary
+     * @param engine  - a convenience reference to the engine so the receiver can call methods if necessary
      * @see model.interfaces.GameEngine
      */
     @Override
     public void result(Slot result, GameEngine engine) {
         // final results logged at Level.INFO
-        logger.log(INFO, "RESULT="+result.toString() + "\n");
+        logger.log(INFO, "RESULT=" + result.toString() + "\n");
         logger.log(INFO, "FINAL PLAYER POINT BALANCES");
 
         String mess = "\n";
-        for (Player player : engine.getAllPlayers()){
+        for (Player player : engine.getAllPlayers()) {
             mess = mess.concat(player.toString());
             mess = mess.concat("\n");
         }

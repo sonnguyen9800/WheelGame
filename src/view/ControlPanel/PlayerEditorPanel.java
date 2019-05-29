@@ -1,6 +1,5 @@
 package view.ControlPanel;
 
-import controller.SpinPanelController;
 import model.SimplePlayer;
 import model.enumeration.BetType;
 import model.interfaces.GameEngine;
@@ -8,16 +7,18 @@ import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.*;
+import static javax.swing.GroupLayout.Alignment.BASELINE;
+import static javax.swing.GroupLayout.Alignment.TRAILING;
+
 /**
  * This Panel provides tool to change Player bettype/ bet point and name
  * events
  * This is inside ControlPanel
+ *
  * @see SimplePlayer
  * @see ControlPanel
  * @see PlayerSelectionPanel
@@ -44,13 +45,15 @@ public class PlayerEditorPanel extends JPanel {
     private GameEngine gameEngine;
 
     private GroupLayout groupLayout;
+
     /**
      * Main Constructor, take two GameEngineCallback
+     *
      * @see GameEngineCallbackGUI
      * @see view.GameEngineCallbackImpl
      */
 
-    public PlayerEditorPanel(GameEngineCallbackGUI gameEngineCallbackGUI, GameEngine gameEngine){
+    public PlayerEditorPanel(GameEngineCallbackGUI gameEngineCallbackGUI, GameEngine gameEngine) {
         groupLayout = new GroupLayout(this);
         setLayout(groupLayout);
         this.gameEngine = gameEngine;
@@ -73,7 +76,7 @@ public class PlayerEditorPanel extends JPanel {
         cancelButton = new JButton("Cancel/Reset");
         destroyButton = new JButton("Remove Player");
 
-        colorsBox = new BetType[] {BetType.RED, BetType.BLACK, BetType.ZEROS};
+        colorsBox = new BetType[]{BetType.RED, BetType.BLACK, BetType.ZEROS};
         box = new JComboBox<>(colorsBox);
 
         populate(groupLayout);
@@ -84,19 +87,19 @@ public class PlayerEditorPanel extends JPanel {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try{
+                try {
                     newPlayer = new SimplePlayer(selectedPlayer.getPlayerId(), playerNameTextfield.getText(),
                             selectedPlayer.getPoints());
                     newPlayer.setBetType((BetType) box.getSelectedItem());
 
-                    if (!newPlayer.setBet(Integer.parseInt(playerBetpointTextfield.getText()))){
+                    if (!newPlayer.setBet(Integer.parseInt(playerBetpointTextfield.getText()))) {
                         JOptionPane.showMessageDialog(null, "Your Bet is invalid");
-                    } else{
+                    } else {
                         updatePlayer(selectedPlayer, newPlayer);
                         gameEngineCallbackGUI.refreshSummaryPanel();
                     }
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error in Input");
                 }
@@ -126,7 +129,7 @@ public class PlayerEditorPanel extends JPanel {
                         "Would you like to delete this player",
                         "Need confirmation",
                         JOptionPane.YES_NO_OPTION);
-                if (n == JOptionPane.OK_OPTION){
+                if (n == JOptionPane.OK_OPTION) {
                     gameEngineCallbackGUI.removePlayer(selectedPlayer);
                     gameEngineCallbackGUI.refreshSummaryPanel();
                     gameEngineCallbackGUI.refreshPlayerSelectionPane();
@@ -137,10 +140,11 @@ public class PlayerEditorPanel extends JPanel {
         });
 
     }
+
     /**
      * Method to show the component
      */
-    private void populate(GroupLayout groupLayout){
+    private void populate(GroupLayout groupLayout) {
 
         playerNameTextfield.setText(selectedPlayer.getPlayerName());
         playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getBet()));
@@ -186,24 +190,26 @@ public class PlayerEditorPanel extends JPanel {
 
         );
     }
+
     /**
      * Method to set which player is being edited
      */
-    public void setSelectedPlayer(Player player){
+    public void setSelectedPlayer(Player player) {
         this.selectedPlayer = player;
         populate(groupLayout);
     }
+
     /**
      * Method to update player
      */
-    private void updatePlayer(Player oldPlayer, Player newPlayer){
+    private void updatePlayer(Player oldPlayer, Player newPlayer) {
         oldPlayer.setPlayerName(newPlayer.getPlayerName());
         oldPlayer.setBet(newPlayer.getBet());
         oldPlayer.setBetType(newPlayer.getBetType());
 
         boolean flag = true;
-        for (Player player : gameEngineCallbackGUI.getPlayers()){
-            if (player.getBet() == 0){
+        for (Player player : gameEngineCallbackGUI.getPlayers()) {
+            if (player.getBet() == 0) {
                 flag = false;
                 break;
             }
@@ -211,7 +217,7 @@ public class PlayerEditorPanel extends JPanel {
         /**
          * After any player is edited successfully, if everyone has a bet, do the spin
          */
-        if (flag){
+        if (flag) {
             gameEngine.spin(1, 200, 4);
         }
     }
@@ -219,11 +225,12 @@ public class PlayerEditorPanel extends JPanel {
     /**
      * Reset the text area and panel
      */
-    private void resetTextArea(){
+    private void resetTextArea() {
         playerNameTextfield.setText("");
         playerBetpointTextfield.setText("");
     }
-    public void refreshEditorPanel(){
+
+    public void refreshEditorPanel() {
         playerNameTextfield.setText("");
         playerBetpointTextfield.setText("");
     }

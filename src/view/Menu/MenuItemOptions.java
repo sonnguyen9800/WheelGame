@@ -9,7 +9,8 @@ public class MenuItemOptions extends JMenu {
     private JMenuItem restartMenuItem;
     private JMenuItem quitGameMenuItem;
     private JMenuItem aboutMenuItem;
-    public MenuItemOptions(){
+
+    public MenuItemOptions() {
         super("Menu");
 
         helpMenuItem = new JMenuItem("Help");
@@ -65,6 +66,7 @@ public class MenuItemOptions extends JMenu {
         add(aboutMenuItem);
         add(quitGameMenuItem);
     }
+
     class NarrowOptionPane extends JOptionPane {
 
         NarrowOptionPane() {

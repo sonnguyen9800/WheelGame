@@ -7,9 +7,10 @@ import view.GameEngineCallbackImpl;
 import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
+
 /**
  * MAIN RUNNER
- *
+ * <p>
  * Run this file to play the game
  */
 public class MVCtest {
@@ -22,10 +23,10 @@ public class MVCtest {
                 GameEngineCallback gameEngineCallbackImp = new GameEngineCallbackImpl();
                 gameEngine.addGameEngineCallback(gameEngineCallbackImp);
 
-                try{
+                try {
                     GameEngineCallback gameEngineCallbackGUI = new GameEngineCallbackGUI(gameEngine);
                     gameEngine.addGameEngineCallback(gameEngineCallbackGUI);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

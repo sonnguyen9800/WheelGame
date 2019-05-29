@@ -69,8 +69,8 @@ public interface GameEngine {
 
     /**
      * @param gameEngineCallback <pre> a client specific implementation of GameEngineCallback used to perform display updates etc.
-     *                           <b>NOTE:</b> you will use a different implementation of the GameEngineCallback
-     *                                 for the console (assignment 1) and GUI (assignment 2) versions</pre>
+     *                                                     <b>NOTE:</b> you will use a different implementation of the GameEngineCallback
+     *                                                           for the console (assignment 1) and GUI (assignment 2) versions</pre>
      * @see view.interfaces.GameEngineCallback
      */
     void addGameEngineCallback(GameEngineCallback gameEngineCallback);

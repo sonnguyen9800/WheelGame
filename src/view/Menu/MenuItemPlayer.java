@@ -4,6 +4,7 @@ import controller.MenuItemActionListener;
 import view.GameEngineCallbackGUI;
 
 import javax.swing.*;
+
 /**
  * This menu leads to create new Dialog used to add new player
  *

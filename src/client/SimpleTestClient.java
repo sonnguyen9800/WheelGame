@@ -6,8 +6,6 @@ import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
-import validate.Validator;
-import view.GameEngineCallbackGUI;
 import view.GameEngineCallbackImpl;
 
 import java.util.Collection;

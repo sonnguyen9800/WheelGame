@@ -6,12 +6,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 /**
  * This Panel Show the WheelImage
  * This panel also takes responsibility to update and create the animation of the ball
+ *
  * @see view.GameEngineCallbackGUI
  */
-public class WheelPanel extends JPanel  {
+public class WheelPanel extends JPanel {
 
     private BufferedImage image;
     private int time = 0;
@@ -27,12 +29,12 @@ public class WheelPanel extends JPanel  {
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
-    private void setTime(int time){
+    private void setTime(int time) {
         this.time = time;
     }
+
     /**
      * The Paint Method - Create the image of the Wheel and the Ball
-     *
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -55,33 +57,33 @@ public class WheelPanel extends JPanel  {
 
     /**
      * The Paint Method - Create the image of the the Ball based on current location of the wheel
-     *
      */
-    private void paintBall(Graphics g, int width, int scaleWidth, int scaleHeight, int x, int y, int time){
+    private void paintBall(Graphics g, int width, int scaleWidth, int scaleHeight, int x, int y, int time) {
         try {
             image = ImageIO.read(new File("img/Basic_roulette_wheel_1024x1024.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Graphics2D g2d = (Graphics2D)g;
-        int sizeOval = width/30;
+        Graphics2D g2d = (Graphics2D) g;
+        int sizeOval = width / 30;
         g2d.setPaint(new Color(243, 255, 53));
 
-        double rad = Math.PI/2 - (Math.PI*time)/19;
+        double rad = Math.PI / 2 - (Math.PI * time) / 19;
 
-        int ballX = x + scaleWidth/2 - sizeOval/2 + (int)((scaleWidth/2)*Math.cos(rad));
-        int ballY = y + scaleHeight/2 - (int)((scaleHeight/2)*Math.sin(rad)) - sizeOval/2;
-        g2d.fillOval(ballX,ballY, sizeOval, sizeOval);
+        int ballX = x + scaleWidth / 2 - sizeOval / 2 + (int) ((scaleWidth / 2) * Math.cos(rad));
+        int ballY = y + scaleHeight / 2 - (int) ((scaleHeight / 2) * Math.sin(rad)) - sizeOval / 2;
+        g2d.fillOval(ballX, ballY, sizeOval, sizeOval);
     }
+
     /**
      * Call this method from outside to update the WheelPanel
      * the timeInput parameter is used to choose the position of the ball
-     * @param timeInput
      *
+     * @param timeInput
      */
 
-    public void paintMovingBall(int timeInput){
+    public void paintMovingBall(int timeInput) {
         removeAll();
         setTime(timeInput);
         repaint();
@@ -90,7 +92,6 @@ public class WheelPanel extends JPanel  {
 
     /**
      * These two methods are used to automatically resize the wheelpanel and the ball
-     *
      */
     private double getScaleFactorToFit(Dimension original, Dimension toFit) {
 
@@ -107,6 +108,7 @@ public class WheelPanel extends JPanel  {
 
         return dScale;
     }
+
     private double getScaleFactor(int iMasterSize, int iTargetSize) {
 
         double dScale;

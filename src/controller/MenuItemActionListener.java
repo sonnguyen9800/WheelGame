@@ -6,8 +6,10 @@ import view.GameEngineCallbackGUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /**
  * This action Listener is used for the MenuItem, used to create new Player
+ *
  * @see view.Menu.WheelMenuBar
  * @see java.awt.MenuItem
  * @see view.Menu.MenuItemPlayer
@@ -15,6 +17,7 @@ import java.awt.event.ActionListener;
 
 public class MenuItemActionListener implements ActionListener {
     private GameEngineCallbackGUI gameEngineCallbackGUI;
+
     public MenuItemActionListener(JFrame jFrame, GameEngineCallbackGUI gameEngineCallbackGUI) {
         super();
         this.gameEngineCallbackGUI = gameEngineCallbackGUI;

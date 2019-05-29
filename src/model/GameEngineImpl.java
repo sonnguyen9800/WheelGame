@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Game Engine Impl
- *
+ * <p>
  * Nothing special, just made like spec.
- *
+ * <p>
  * One note in spin method
  */
 public class GameEngineImpl implements GameEngine {
@@ -99,9 +100,10 @@ public class GameEngineImpl implements GameEngine {
             return slotsCollection.get(index + 1);
         }
     }
+
     /**
      * This function is changed so that it can work when GUI is not added
-     *
+     * <p>
      * If there is not GUI: using normal Thread
      * If there are GUI: using Timer Swing
      */
@@ -114,32 +116,33 @@ public class GameEngineImpl implements GameEngine {
         Slot firstSlot = randomlySelectASlot(SlotsCollection);
         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
             gameEngineCallback.nextSlot(firstSlot, this);
-            if (gameEngineCallback instanceof GameEngineCallbackGUI){
+            if (gameEngineCallback instanceof GameEngineCallbackGUI) {
                 GUIexist = true;
             }
         }
-        if (GUIexist){
+        if (GUIexist) {
             Timer timer = new Timer(initialDelay, null);
             timer.addActionListener(new ActionListener() {
                 Slot nextSlot = firstSlot;
                 int delay = initialDelay;
                 GameEngineImpl gameEngine = gameEngineRef;
+
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    if (delay < (finalDelay-delayIncrement)){
+                    if (delay < (finalDelay - delayIncrement)) {
                         nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
                         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-                            gameEngineCallback.nextSlot(nextSlot, gameEngine );
+                            gameEngineCallback.nextSlot(nextSlot, gameEngine);
                         }
                         timer.setDelay(delay += delayIncrement);
-                    } else{
+                    } else {
                         nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
 
                         gameEngine.calculateResult(nextSlot);
                         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-                            gameEngineCallback.result(nextSlot, gameEngine );
+                            gameEngineCallback.result(nextSlot, gameEngine);
                         }
-                        for (Player player: getAllPlayers()){
+                        for (Player player : getAllPlayers()) {
                             player.resetBet();
                         }
                         timer.stop();
@@ -150,21 +153,21 @@ public class GameEngineImpl implements GameEngine {
             timer.start();
         }
 
-        if (!GUIexist){
+        if (!GUIexist) {
             //int delay = initialDelay;
             Slot nextSlot = firstSlot;
 
-            for (int delay = initialDelay; delay <= finalDelay; delay+= delayIncrement ){
+            for (int delay = initialDelay; delay <= finalDelay; delay += delayIncrement) {
                 nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
 
                 delay += delayIncrement;
-                if (delay < (finalDelay - delayIncrement)){
-                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
+                if (delay < (finalDelay - delayIncrement)) {
+                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
                         gameEngineCallback.nextSlot(nextSlot, this);
                     }
-                }else{
+                } else {
                     this.calculateResult(nextSlot);
-                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks){
+                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
                         gameEngineCallback.result(nextSlot, this);
                     }
                 }
@@ -177,7 +180,6 @@ public class GameEngineImpl implements GameEngine {
 
 
         }
-
 
 
     }
