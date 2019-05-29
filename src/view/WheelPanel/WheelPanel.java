@@ -13,15 +13,6 @@ public class WheelPanel extends JPanel  {
     private int time = 0;
 
     public WheelPanel() {
-
-    }
-
-    private void setTime(int time){
-        this.time = time;
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
         try {
             image = ImageIO.read(new File("img/wheel_image.png"));
         } catch (IOException e) {
@@ -30,6 +21,15 @@ public class WheelPanel extends JPanel  {
         setSize(400, 400);
         setPreferredSize(new Dimension(400, 400));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+
+    private void setTime(int time){
+        this.time = time;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+
 
 
         super.paintComponent(g);

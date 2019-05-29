@@ -14,10 +14,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Main UI
+ *
+ * It contains 5 Panel:
+ * 1) WheelPanel (Center)
+ * 2) SummaryPanel (Left)
+ * 3) ControlPanel (Right)
+ * 4) Menubar (WheelMenuBar) (Top)
+ * 5) StatusBar (Below)
+ *
+ * @author sonng s3634703
+ */
 public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback {
     private final static int WHEELGAME_WIDTH = 1200;
     private final static int WHEELGAME_HEIGHT = 480;
+
 
     private WheelPanel wheelPanel;
     private ControlPanel controlPanel;
@@ -57,31 +69,53 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
 
     }
 
+
+    /**
+     * Create a new Player and update the new Player to the SummaryPanel and ControlPanel
+     *
+     * @author SonNg 3634703
+     */
+
     public void createNewPlayer(Player player){
         gameEngine.addPlayer(player);
         summaryPanel.addnewPlayer(player);
         controlPanel.getPlayerSelectionPanel().updateComboPlayers();
     }
 
+    /**
+     * set a Selected player, this player is interacted and updated inside ControlPanel
+     */
+
     public void setSelectedPlayer(Player player){
         this.controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
     }
 
+    /**
+     * Remove a Player and update the changes to the SummaryPanel and ControlPanel
+     */
     public void removePlayer(Player player){
         gameEngine.removePlayer(player);
     }
 
+    /**
+     * Reload the PlayerSelectionPanel and PlayerEditorPanel inside ControlPanel
+     */
     public void refreshPlayerSelectionPane(){
         this.controlPanel.getPlayerSelectionPanel().updateComboPlayers();
         this.controlPanel.getPlayerEditorPanel().refreshEditorPanel();
     }
 
+    /**
+     * Reload the Summary Panel
+     */
     public void refreshSummaryPanel(){
         this.summaryPanel.updateListPlayer();
 
 
     }
-
+    /**
+     * Get All current Playes
+     */
     public List<Player> getPlayers(){
         return (List<Player>) gameEngine.getAllPlayers();
     }

@@ -42,21 +42,8 @@ public class SummaryPanel extends JPanel {
     public void updateListPlayer(){
         listPlayerModel.removeAllElements();
         for (Player player : gameEngineCallbackGUI.getPlayers()){
-            System.out.println("Update: " + player.toString());
             listPlayerModel.addElement(player);
         }
-//        playerJList.setModel(listPlayerModel);
-//
-//        pane.removeAll();
-//        pane.add(playerJList);
-//        add(pane);
-
-//        playerJList = new JList<>(listPlayerModel);
-//        playerJList.setCellRenderer(new PlayerCellRenderer());
-//        playerJList.setFixedCellHeight(50);
-//        playerJList.setFixedCellWidth(380);
-//        JScrollPane pane = new JScrollPane(playerJList);
-//        add(pane);
 
     }
 

@@ -76,11 +76,7 @@ public class PlayerEditorPanel extends JPanel {
                     if (!newPlayer.setBet(Integer.parseInt(playerBetpointTextfield.getText()))){
                         JOptionPane.showMessageDialog(null, "Your Bet is invalid");
                     } else{
-                        System.out.println(Integer.parseInt(playerBetpointTextfield.getText()));
-                        System.out.println("New Player created: " + newPlayer.toString());
                         updatePlayer(selectedPlayer, newPlayer);
-
-
                         gameEngineCallbackGUI.refreshSummaryPanel();
                     }
 

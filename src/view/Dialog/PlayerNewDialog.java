@@ -27,10 +27,9 @@ public class PlayerNewDialog extends JDialog {
         if (result == JOptionPane.OK_OPTION) {
             try{
                 SimplePlayer simplePlayer = new SimplePlayer(playerID.getText(), playerName.getText(), Integer.parseInt(playerIniPoint.getText()));
-                System.out.println(simplePlayer.toString());
                 gameEngineCallbackGUI.createNewPlayer(simplePlayer);
             }catch (Exception e){
-                System.out.println("LOL :" + e);
+                e.printStackTrace();
             }
 
         }
