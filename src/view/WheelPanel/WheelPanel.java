@@ -6,7 +6,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * This Panel Show the WheelImage
+ * This panel also takes responsibility to update and create the animation of the ball
+ * @see view.GameEngineCallbackGUI
+ */
 public class WheelPanel extends JPanel  {
 
     private BufferedImage image;
@@ -26,12 +30,12 @@ public class WheelPanel extends JPanel  {
     private void setTime(int time){
         this.time = time;
     }
-
+    /**
+     * The Paint Method - Create the image of the Wheel and the Ball
+     *
+     */
     @Override
     protected void paintComponent(Graphics g) {
-
-
-
         super.paintComponent(g);
         double scaleFactor = Math.min(1d, getScaleFactorToFit(new Dimension(image.getWidth(), image.getHeight()), getSize()));
 
@@ -49,6 +53,10 @@ public class WheelPanel extends JPanel  {
         paintBall(g, width, scaleWidth, scaleHeight, x, y, time);
     }
 
+    /**
+     * The Paint Method - Create the image of the the Ball based on current location of the wheel
+     *
+     */
     private void paintBall(Graphics g, int width, int scaleWidth, int scaleHeight, int x, int y, int time){
         try {
             image = ImageIO.read(new File("img/wheel_image.png"));
@@ -66,7 +74,12 @@ public class WheelPanel extends JPanel  {
         int ballY = y + scaleHeight/2 - (int)((scaleHeight/2)*Math.sin(rad)) - sizeOval/2;
         g2d.fillOval(ballX,ballY, sizeOval, sizeOval);
     }
-
+    /**
+     * Call this method from outside to update the WheelPanel
+     * the timeInput parameter is used to choose the position of the ball
+     * @param timeInput
+     *
+     */
 
     public void paintMovingBall(int timeInput){
         removeAll();
@@ -75,7 +88,10 @@ public class WheelPanel extends JPanel  {
     }
 
 
-
+    /**
+     * These two methods are used to automatically resize the wheelpanel and the ball
+     *
+     */
     private double getScaleFactorToFit(Dimension original, Dimension toFit) {
 
         double dScale = 1d;

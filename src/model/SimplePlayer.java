@@ -2,7 +2,11 @@ package model;
 
 import model.enumeration.BetType;
 import model.interfaces.Player;
-
+/**
+ * SimplePlayer,
+ * implements Player
+ * @see Player
+ */
 public class SimplePlayer implements Player {
     private String playerID;
     private String playerName;

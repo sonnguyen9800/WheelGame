@@ -4,7 +4,14 @@ import model.SimplePlayer;
 import view.GameEngineCallbackGUI;
 
 import javax.swing.*;
-
+/**
+ * This JDialog takes input from users and create new Player
+ *
+ * @see model.interfaces.Player
+ * @see controller.MenuItemActionListener
+ * @see view.Menu.MenuItemPlayer
+ *
+ */
 public class PlayerNewDialog extends JDialog {
     private GameEngineCallbackGUI gameEngineCallbackGUI;
     public PlayerNewDialog(GameEngineCallbackGUI gameEngineCallbackGUI){

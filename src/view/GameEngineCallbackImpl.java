@@ -25,13 +25,30 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
         logger.setLevel(Level.INFO);
     }
 
+    /**
+     * called as the wheel spins<br>
+     * use this to update GUI or log to console
+     *
+     * @param slot   - the next slot that the rolling ball entered
+     * @param engine - a convenience reference to the engine so the receiver can call methods if necessary
+     * @see model.interfaces.GameEngine
+     */
+
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
         // intermediate results logged at Level.FINE
         logger.log(INFO, "Next Slot " + slot.toString());
 
     }
-
+    /**
+     * called when the wheel has stopped spinning<br>
+     * this is a convenient place to call {@link GameEngine#calculateResult(Slot winningSlot)}<br>
+     * and {@link Player#resetBet()}
+     *
+     * @param result- the slot that the ball landed in
+     * @param engine      - a convenience reference to the engine so the receiver can call methods if necessary
+     * @see model.interfaces.GameEngine
+     */
     @Override
     public void result(Slot result, GameEngine engine) {
         // final results logged at Level.INFO

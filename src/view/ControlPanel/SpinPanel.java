@@ -6,6 +6,15 @@ import model.interfaces.GameEngine;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This Panel provides the Spin Button, used to spin the whale and trigger
+ * events
+ * This is inside ControlPanel
+ * @see ControlPanel
+ * @see GameEngine
+ * @see SpinPanelController
+ */
+
 public class SpinPanel extends JPanel {
     private GameEngine gameEngine;
     public SpinPanel(GameEngine gameEngine){

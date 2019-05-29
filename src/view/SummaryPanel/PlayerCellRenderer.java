@@ -4,14 +4,22 @@ import model.interfaces.Player;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+/**
+ * This ListCellRenderer helps to draw each Player on the SummaryPanel
+ * @see SummaryPanel for more information
+ *
+ */
 
 class PlayerCellRenderer extends JLabel implements ListCellRenderer {
-    private static final Color HIGHLIGHT_COLOR = new Color(118, 128, 125);
     PlayerCellRenderer() {
         setOpaque(true);
         setIconTextGap(12);
     }
-
+    /**
+     * This ListCellRenderer helps to draw each Player on the SummaryPanel
+     * @see SummaryPanel for more information
+     * @param value is the choosen one
+     */
     public Component getListCellRendererComponent(JList list, Object value,
                                                   int index, boolean isSelected, boolean cellHasFocus) {
         Player entry = (Player) value;
@@ -21,7 +29,12 @@ class PlayerCellRenderer extends JLabel implements ListCellRenderer {
                 + " Bet: " + entry.getBet();
 
         setText(dataEntry);
-
+        /**
+         * Background color of each cell is determined by the Bettype
+         * @see Player
+         * @see SummaryPanel for more information
+         *
+         */
         switch (entry.getBetType()){
             case BLACK:
                 setBackground(Color.GRAY);

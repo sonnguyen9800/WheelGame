@@ -15,7 +15,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * Game Engine Impl
+ *
+ * Nothing special, just made like spec.
+ *
+ * One note in spin method
+ */
 public class GameEngineImpl implements GameEngine {
     //Collection of Slots:
     private static List<Slot> SlotsCollection = iniSlotCollection();
@@ -93,7 +99,12 @@ public class GameEngineImpl implements GameEngine {
             return slotsCollection.get(index + 1);
         }
     }
-
+    /**
+     * This function is changed so that it can work when GUI is not added
+     *
+     * If there is not GUI: using normal Thread
+     * If there are GUI: using Timer Swing
+     */
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         boolean GUIexist = false;

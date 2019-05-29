@@ -1,11 +1,11 @@
 package view.ControlPanel;
 
+import controller.SpinPanelController;
 import model.SimplePlayer;
 import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
-import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
 
@@ -14,7 +14,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static javax.swing.GroupLayout.Alignment.*;
-
+/**
+ * This Panel provides tool to change Player bettype/ bet point and name
+ * events
+ * This is inside ControlPanel
+ * @see SimplePlayer
+ * @see ControlPanel
+ * @see PlayerSelectionPanel
+ */
 public class PlayerEditorPanel extends JPanel {
 
     private Player selectedPlayer = new SimplePlayer("?", "", 0);
@@ -37,6 +44,12 @@ public class PlayerEditorPanel extends JPanel {
     private GameEngine gameEngine;
 
     private GroupLayout groupLayout;
+    /**
+     * Main Constructor, take two GameEngineCallback
+     * @see GameEngineCallbackGUI
+     * @see view.GameEngineCallbackImpl
+     */
+
     public PlayerEditorPanel(GameEngineCallbackGUI gameEngineCallbackGUI, GameEngine gameEngine){
         groupLayout = new GroupLayout(this);
         setLayout(groupLayout);
@@ -65,6 +78,9 @@ public class PlayerEditorPanel extends JPanel {
 
         populate(groupLayout);
 
+        /**
+         * When this button is clicked, a player will be edited (if the input is valid)
+         */
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -87,7 +103,9 @@ public class PlayerEditorPanel extends JPanel {
 
             }
         });
-
+        /**
+         * When this button is clicked,all changes are reversed
+         */
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -96,7 +114,9 @@ public class PlayerEditorPanel extends JPanel {
                 box.setSelectedItem(selectedPlayer.getBetType());
             }
         });
-
+        /**
+         * When this button is clicked, a player will be removed, a dialog will be shown to confirm the change
+         */
         destroyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -117,6 +137,9 @@ public class PlayerEditorPanel extends JPanel {
         });
 
     }
+    /**
+     * Method to show the component
+     */
     private void populate(GroupLayout groupLayout){
 
         playerNameTextfield.setText(selectedPlayer.getPlayerName());
@@ -163,12 +186,16 @@ public class PlayerEditorPanel extends JPanel {
 
         );
     }
-
+    /**
+     * Method to set which player is being edited
+     */
     public void setSelectedPlayer(Player player){
         this.selectedPlayer = player;
         populate(groupLayout);
     }
-
+    /**
+     * Method to update player
+     */
     private void updatePlayer(Player oldPlayer, Player newPlayer){
         oldPlayer.setPlayerName(newPlayer.getPlayerName());
         oldPlayer.setBet(newPlayer.getBet());
@@ -181,11 +208,17 @@ public class PlayerEditorPanel extends JPanel {
                 break;
             }
         }
+        /**
+         * After any player is edited successfully, if everyone has a bet, do the spin
+         */
         if (flag){
             gameEngine.spin(1, 200, 4);
         }
     }
 
+    /**
+     * Reset the text area and panel
+     */
     private void resetTextArea(){
         playerNameTextfield.setText("");
         playerBetpointTextfield.setText("");

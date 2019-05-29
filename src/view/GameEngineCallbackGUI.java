@@ -120,6 +120,15 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         return (List<Player>) gameEngine.getAllPlayers();
     }
 
+    /**
+     * called as the wheel spins<br>
+     * use this to update GUI or log to console
+     *
+     * @param slot   - the next slot that the rolling ball entered
+     * @param engine - a convenience reference to the engine so the receiver can call methods if necessary
+     * @see model.interfaces.GameEngine
+     */
+
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
         int index;
@@ -135,6 +144,14 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         });
     }
 
+    /**
+     * called when the wheel has stopped spinning<br>
+     *
+     *
+     * @param winningSlot- the slot that the ball landed in
+     * @param engine      - a convenience reference to the engine so the receiver can call methods if necessary
+     * @see model.interfaces.GameEngine
+     */
     @Override
     public void result(Slot winningSlot, GameEngine engine) {
 
