@@ -12,13 +12,13 @@ public class SummaryPanel extends JPanel {
 
     private DefaultListModel<Player> listPlayerModel = new DefaultListModel<>();
     private JList<Player> playerJList;
+    private GameEngineCallbackGUI gameEngineCallbackGUI;
 
-
-    public SummaryPanel(){
+    public SummaryPanel(GameEngineCallbackGUI gameEngineCallbackGUI){
         String title = "Summary";
         Border border = BorderFactory.createTitledBorder(title);
         this.setBorder(border);
-
+        this.gameEngineCallbackGUI = gameEngineCallbackGUI;
         playerJList = new JList<>(listPlayerModel);
         playerJList.setCellRenderer(new PlayerCellRenderer());
 
@@ -39,7 +39,7 @@ public class SummaryPanel extends JPanel {
 
     public void updateListPlayer(){
         listPlayerModel.removeAllElements();
-        GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
+
         for (Player player : gameEngineCallbackGUI.getPlayers()){
             listPlayerModel.addElement(player);
         }

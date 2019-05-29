@@ -20,25 +20,45 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     private final static int WHEELGAME_WIDTH = 1200;
     private final static int WHEELGAME_HEIGHT = 480;
 
-    private static GameEngineCallback singletonInstance = new GameEngineCallbackGUI();
-
-    public static GameEngineCallback getSingletonInstance()
-    {
-        return singletonInstance;
-    }
-
     private WheelPanel wheelPanel;
     private ControlPanel controlPanel;
     private SummaryPanel summaryPanel;
     private StatusBar statusBar;
+    private GameEngine gameEngine;
 
-    private GameEngineCallbackGUI(){
+    public GameEngineCallbackGUI(GameEngine gameEngine){
         super("Wheel Game");
-        populate();
+        setLayout(new BorderLayout());
+        this.gameEngine = gameEngine;
+
+        setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        wheelPanel = new WheelPanel();
+        add(wheelPanel, BorderLayout.CENTER);
+        wheelPanel.setPreferredSize(new Dimension(400,400));
+
+        summaryPanel = new SummaryPanel(this);
+        add(summaryPanel, BorderLayout.WEST);
+        summaryPanel.setPreferredSize(new Dimension(400,400));
+
+        controlPanel = new ControlPanel(this, gameEngine);
+        add(controlPanel, BorderLayout.EAST);
+        controlPanel.setPreferredSize(new Dimension(400,400));
+
+        statusBar = new StatusBar();
+        add(statusBar, BorderLayout.SOUTH);
+
+        WheelMenuBar wheelMenuBar = new WheelMenuBar(this, this);
+        setJMenuBar(wheelMenuBar);
+
+
+        setBackground(Color.DARK_GRAY);
+        setVisible(true);
+
     }
 
     public void createNewPlayer(Player player){
-        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
         gameEngine.addPlayer(player);
         summaryPanel.addnewPlayer(player);
         controlPanel.getPlayerSelectionPanel().updateComboPlayers();
@@ -49,7 +69,6 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     }
 
     public void removePlayer(Player player){
-        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
         gameEngine.removePlayer(player);
     }
 
@@ -61,41 +80,39 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     }
 
     public List<Player> getPlayers(){
-        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
         return (List<Player>) gameEngine.getAllPlayers();
-
     }
 
-
-    private void populate(){
-        setLayout(new BorderLayout());
-
-        setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        wheelPanel = new WheelPanel();
-        add(wheelPanel, BorderLayout.CENTER);
-        wheelPanel.setPreferredSize(new Dimension(400,400));
-
-        summaryPanel = new SummaryPanel();
-        add(summaryPanel, BorderLayout.WEST);
-        summaryPanel.setPreferredSize(new Dimension(400,400));
-
-        controlPanel = new ControlPanel(this);
-        add(controlPanel, BorderLayout.EAST);
-        controlPanel.setPreferredSize(new Dimension(400,400));
-
-        statusBar = new StatusBar();
-        add(statusBar, BorderLayout.SOUTH);
-
-        WheelMenuBar wheelMenuBar = new WheelMenuBar(this);
-        setJMenuBar(wheelMenuBar);
-
-
-        setBackground(Color.DARK_GRAY);
-        setVisible(true);
-    }
-
+//
+//    private void populate(){
+//        setLayout(new BorderLayout());
+//
+//        setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//
+//        wheelPanel = new WheelPanel();
+//        add(wheelPanel, BorderLayout.CENTER);
+//        wheelPanel.setPreferredSize(new Dimension(400,400));
+//
+//        summaryPanel = new SummaryPanel(this);
+//        add(summaryPanel, BorderLayout.WEST);
+//        summaryPanel.setPreferredSize(new Dimension(400,400));
+//
+//        controlPanel = new ControlPanel(this, gameEngine);
+//        add(controlPanel, BorderLayout.EAST);
+//        controlPanel.setPreferredSize(new Dimension(400,400));
+//
+//        statusBar = new StatusBar();
+//        add(statusBar, BorderLayout.SOUTH);
+//
+//        WheelMenuBar wheelMenuBar = new WheelMenuBar(this, this);
+//        setJMenuBar(wheelMenuBar);
+//
+//
+//        setBackground(Color.DARK_GRAY);
+//        setVisible(true);
+//    }
+//
 
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {

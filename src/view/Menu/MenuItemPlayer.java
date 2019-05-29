@@ -9,12 +9,15 @@ public class MenuItemPlayer extends JMenu {
     JFrame jFrame;
     MenuItemActionListener menuItemActionListener;
     private JMenuItem addPlayer;
+    private GameEngineCallbackGUI gameEngineCallbackGUI;
 
 
-    public MenuItemPlayer(JFrame jFrame) {
+    public MenuItemPlayer(JFrame jFrame, GameEngineCallbackGUI gameEngineCallbackGUI) {
         super("Add Player");
         this.jFrame = jFrame;
-        this.menuItemActionListener = new MenuItemActionListener(jFrame);
+
+        this.gameEngineCallbackGUI = gameEngineCallbackGUI;
+        this.menuItemActionListener = new MenuItemActionListener(jFrame, gameEngineCallbackGUI);
 
         addPlayer = new JMenuItem();
         addPlayer.addActionListener(menuItemActionListener);

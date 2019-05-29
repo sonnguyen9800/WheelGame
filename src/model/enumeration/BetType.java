@@ -59,4 +59,5 @@ public enum BetType {
      */
     public abstract void applyWinLoss(Player player, Slot winSlot);
 
+
 }

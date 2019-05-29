@@ -6,11 +6,13 @@ import view.GameEngineCallbackGUI;
 import javax.swing.*;
 
 public class PlayerNewDialog extends JDialog {
-
-    public PlayerNewDialog(){
+    private GameEngineCallbackGUI gameEngineCallbackGUI;
+    public PlayerNewDialog(GameEngineCallbackGUI gameEngineCallbackGUI){
         JTextField playerID = new JTextField();
         JTextField playerName = new JTextField();
         JTextField playerIniPoint = new JTextField();
+
+        this.gameEngineCallbackGUI = gameEngineCallbackGUI;
 
         final JComponent[] inputs = new JComponent[] {
                 new JLabel("Player ID"),
@@ -26,7 +28,6 @@ public class PlayerNewDialog extends JDialog {
             try{
                 SimplePlayer simplePlayer = new SimplePlayer(playerID.getText(), playerName.getText(), Integer.parseInt(playerIniPoint.getText()));
                 System.out.println(simplePlayer.toString());
-                GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
                 gameEngineCallbackGUI.createNewPlayer(simplePlayer);
             }catch (Exception e){
                 System.out.println("LOL :" + e);

@@ -18,13 +18,8 @@ import static java.util.logging.Level.INFO;
  */
 public class GameEngineCallbackImpl implements GameEngineCallback {
     private static final Logger logger = Logger.getLogger(GameEngineCallback.class.getName());
-    private static GameEngineCallback singletonInstance = new GameEngineCallbackImpl();
 
-    public static GameEngineCallback getSingletonInstance()
-    {
-        return singletonInstance;
-    }
-    private GameEngineCallbackImpl() {
+    public GameEngineCallbackImpl() {
         // FINE shows wheel spinning output, INFO only shows result
         logger.setLevel(Level.INFO);
     }

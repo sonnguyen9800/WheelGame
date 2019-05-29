@@ -28,7 +28,7 @@ public class SimpleTestClient {
     private static final Logger logger = Logger.getLogger(SimpleTestClient.class.getName());
 
     public static void main(String[] args) {
-        final GameEngine gameEngine = GameEngineImpl.getSingletonInstance();
+        final GameEngine gameEngine = new GameEngineImpl();
 
         // call method in Validator.jar to test *structural* correctness
         // just passing this does not mean it actually works .. you need to test yourself!
@@ -40,7 +40,7 @@ public class SimpleTestClient {
                 new SimplePlayer("2", "The Loser", 750), new SimplePlayer("3", "The Dabbler", 500)};
 
         // add logging callback
-        gameEngine.addGameEngineCallback(GameEngineCallbackImpl.getSingletonInstance());
+        gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
 
         // check the wheel creation is correct by inspecting logs
         logWheel(gameEngine.getWheelSlots());

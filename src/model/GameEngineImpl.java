@@ -16,13 +16,6 @@ import java.util.List;
 import java.util.Random;
 
 public class GameEngineImpl implements GameEngine {
-
-    private static GameEngine singletonInstance = new GameEngineImpl();
-    public static GameEngine getSingletonInstance()
-    {
-        return singletonInstance;
-    }
-
     //Collection of Slots:
     private static List<Slot> SlotsCollection = iniSlotCollection();
     //Collection of Player:
@@ -30,7 +23,7 @@ public class GameEngineImpl implements GameEngine {
     //Collection of GameEngineCallback
     private Collection<GameEngineCallback> GameEnginesCallBacks;
 
-    private GameEngineImpl() {
+    public GameEngineImpl() {
         GameEnginesCallBacks = new ArrayList<>();
     }
 
@@ -102,6 +95,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
+        GameEngineImpl gameEngineRef = this;
         Slot firstSlot = randomlySelectASlot(SlotsCollection);
         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
             gameEngineCallback.nextSlot(firstSlot, this);
@@ -111,7 +105,7 @@ public class GameEngineImpl implements GameEngine {
         timer.addActionListener(new ActionListener() {
             Slot nextSlot = firstSlot;
             int delay = initialDelay;
-            GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+            GameEngineImpl gameEngine = gameEngineRef;
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (delay < (finalDelay-delayIncrement)){
@@ -124,6 +118,9 @@ public class GameEngineImpl implements GameEngine {
                     nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
                     for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
                         gameEngineCallback.result(nextSlot, gameEngine );
+                    }
+                    for (Player player: getAllPlayers()){
+                        player.setBet(0);
                     }
                     gameEngine.calculateResult(nextSlot);
                     timer.stop();

@@ -4,6 +4,7 @@ import model.SimplePlayer;
 import model.enumeration.BetType;
 import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
+import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
 
@@ -31,10 +32,14 @@ public class PlayerEditorPanel extends JPanel {
     private JButton cancelButton;
     private JButton destroyButton;
 
+    private GameEngineCallbackGUI gameEngineCallbackGUI;
+
     private GroupLayout groupLayout;
-    public PlayerEditorPanel(){
+    public PlayerEditorPanel(GameEngineCallbackGUI gameEngineCallbackGUI){
         groupLayout = new GroupLayout(this);
         setLayout(groupLayout);
+
+        this.gameEngineCallbackGUI = gameEngineCallbackGUI;
 
 
         playerNameLabel = new JLabel("Player Name: ");
@@ -72,7 +77,8 @@ public class PlayerEditorPanel extends JPanel {
                         System.out.println(Integer.parseInt(playerBetpointTextfield.getText()));
                         System.out.println("New Player created: " + newPlayer.toString());
                         updatePlayer(selectedPlayer, newPlayer);
-                        GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
+
+
                         gameEngineCallbackGUI.refreshSummaryPanel();
                     }
 
@@ -103,7 +109,6 @@ public class PlayerEditorPanel extends JPanel {
                         "Need confirmation",
                         JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.OK_OPTION){
-                    GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
                     gameEngineCallbackGUI.removePlayer(selectedPlayer);
                     gameEngineCallbackGUI.refreshSummaryPanel();
                     gameEngineCallbackGUI.refreshPlayerSelectionPane();
