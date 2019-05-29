@@ -7,6 +7,7 @@ import view.interfaces.GameEngineCallback;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 
 /**
@@ -23,7 +24,6 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
     {
         return singletonInstance;
     }
-    //TODO: FIX THE LEVEL after finish
     private GameEngineCallbackImpl() {
         // FINE shows wheel spinning output, INFO only shows result
         logger.setLevel(Level.INFO);
@@ -32,7 +32,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
         // intermediate results logged at Level.FINE
-        logger.log(INFO, "Next Slot " + slot.toString());
+        logger.log(FINE, "Next Slot " + slot.toString());
 
     }
 

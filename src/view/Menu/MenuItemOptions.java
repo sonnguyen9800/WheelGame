@@ -3,10 +3,10 @@ package view.Menu;
 import javax.swing.*;
 
 public class MenuItemOptions extends JMenu {
-    JMenuItem helpMenuItem;
-    JMenuItem restartMenuItem;
-    JMenuItem quitGameMenuItem;
-    JMenuItem aboutMenuItem;
+    private JMenuItem helpMenuItem;
+    private JMenuItem restartMenuItem;
+    private JMenuItem quitGameMenuItem;
+    private JMenuItem aboutMenuItem;
     public MenuItemOptions(){
         super("New Game");
 

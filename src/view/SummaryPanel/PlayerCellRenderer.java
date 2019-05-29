@@ -1,16 +1,13 @@
 package view.SummaryPanel;
 
 import model.interfaces.Player;
-import view.GameEngineCallbackGUI;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
 class PlayerCellRenderer extends JLabel implements ListCellRenderer {
     private static final Color HIGHLIGHT_COLOR = new Color(118, 128, 125);
-    private GameEngineCallbackGUI gameEngineCallbackGUI = (GameEngineCallbackGUI) GameEngineCallbackGUI.getSingletonInstance();
-    public PlayerCellRenderer() {
+    PlayerCellRenderer() {
         setOpaque(true);
         setIconTextGap(12);
     }

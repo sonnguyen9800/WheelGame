@@ -99,23 +99,34 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
 
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
-        int index = 0;
-        ArrayList list = new ArrayList(engine.getWheelSlots());
+        int index;
+        List<Slot> list = (List<Slot>) engine.getWheelSlots();
         index = list.indexOf(slot);
         int finalIndex = index;
         statusBar.setMessage("Spinning");
-        SwingUtilities.invokeLater(() -> wheelPanel.paintMovingBall(finalIndex));
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                wheelPanel.paintMovingBall(finalIndex);
+            }
+        });
     }
 
     @Override
     public void result(Slot winningSlot, GameEngine engine) {
 
         int index;
-        ArrayList list = new ArrayList(engine.getWheelSlots());
+        ArrayList<Slot> list = new ArrayList<>(engine.getWheelSlots());
         index = list.indexOf(winningSlot);
 
         int finalIndex = index;
-        SwingUtilities.invokeLater(() -> wheelPanel.paintMovingBall(finalIndex));
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                wheelPanel.paintMovingBall(finalIndex);
+            }
+        });
         refreshSummaryPanel();
         statusBar.setMessage("New Result Updated");
 

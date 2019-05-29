@@ -2,17 +2,14 @@ package view.ControlPanel;
 
 import model.SimplePlayer;
 import model.enumeration.BetType;
-import model.enumeration.Color;
 import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
-import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import static javax.swing.GroupLayout.Alignment.*;
 
@@ -57,7 +54,7 @@ public class PlayerEditorPanel extends JPanel {
         destroyButton = new JButton("Remove Player");
 
         colorsBox = new BetType[] {BetType.RED, BetType.BLACK, BetType.ZEROS};
-        box = new JComboBox<BetType>(colorsBox);
+        box = new JComboBox<>(colorsBox);
 
         populate(groupLayout);
 
@@ -80,7 +77,7 @@ public class PlayerEditorPanel extends JPanel {
                     }
 
                 }catch (Exception e){
-                    System.out.println(e);
+                    e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error in Input");
                 }
 
@@ -117,7 +114,7 @@ public class PlayerEditorPanel extends JPanel {
         });
 
     }
-    public void populate(GroupLayout groupLayout){
+    private void populate(GroupLayout groupLayout){
 
         playerNameTextfield.setText(selectedPlayer.getPlayerName());
         playerBetpointTextfield.setText(String.valueOf(selectedPlayer.getBet()));
@@ -170,13 +167,13 @@ public class PlayerEditorPanel extends JPanel {
         populate(groupLayout);
     }
 
-    public void updatePlayer(Player oldPlayer, Player newPlayer){
+    private void updatePlayer(Player oldPlayer, Player newPlayer){
         oldPlayer.setPlayerName(newPlayer.getPlayerName());
         oldPlayer.setBet(newPlayer.getBet());
         oldPlayer.setBetType(newPlayer.getBetType());
     }
 
-    public void resetTextArea(){
+    private void resetTextArea(){
         playerNameTextfield.setText("");
         playerBetpointTextfield.setText("");
     }

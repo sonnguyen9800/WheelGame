@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlayerSelectionPanel extends JPanel {
-    JComboBox<String> comboPlayers = new JComboBox<>();
+    private JComboBox<String> comboPlayers = new JComboBox<>();
     private GameEngineCallbackGUI gameEngineCallbackGUI ;
 
 
@@ -36,7 +36,7 @@ public class PlayerSelectionPanel extends JPanel {
         add(comboPlayers);
 
     }
-    public void setSelectedPlayer(int index){
+    private void setSelectedPlayer(int index){
         if ( 0 <= index && index <= this.gameEngineCallbackGUI.getPlayers().size()){
             this.gameEngineCallbackGUI.setSelectedPlayer(this.gameEngineCallbackGUI.getPlayers().get(index));
         }

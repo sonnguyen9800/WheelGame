@@ -3,20 +3,14 @@ package view.WheelPanel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public class WheelPanel extends JPanel  {
 
     private BufferedImage image;
-    private Image backGroundImage;
-    int time = 0;
+    private int time = 0;
 
     public WheelPanel() {
 
@@ -82,7 +76,7 @@ public class WheelPanel extends JPanel  {
 
 
 
-    public double getScaleFactorToFit(Dimension original, Dimension toFit) {
+    private double getScaleFactorToFit(Dimension original, Dimension toFit) {
 
         double dScale = 1d;
 
@@ -97,9 +91,9 @@ public class WheelPanel extends JPanel  {
 
         return dScale;
     }
-    public double getScaleFactor(int iMasterSize, int iTargetSize) {
+    private double getScaleFactor(int iMasterSize, int iTargetSize) {
 
-        double dScale = 1;
+        double dScale;
         if (iMasterSize > iTargetSize) {
 
             dScale = (double) iTargetSize / (double) iMasterSize;

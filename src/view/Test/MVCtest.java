@@ -3,7 +3,6 @@ package view.Test;
 import model.GameEngineImpl;
 import view.GameEngineCallbackGUI;
 import view.GameEngineCallbackImpl;
-import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
 

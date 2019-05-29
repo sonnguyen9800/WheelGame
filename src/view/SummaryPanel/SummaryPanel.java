@@ -9,10 +9,9 @@ import javax.swing.border.Border;
 
 
 public class SummaryPanel extends JPanel {
-    //public Player players[] ;
 
-    private DefaultListModel<Player> listPlayerModel = new DefaultListModel<Player>();
-    public JList playerJList;
+    private DefaultListModel<Player> listPlayerModel = new DefaultListModel<>();
+    private JList<Player> playerJList;
 
 
     public SummaryPanel(){
@@ -20,7 +19,7 @@ public class SummaryPanel extends JPanel {
         Border border = BorderFactory.createTitledBorder(title);
         this.setBorder(border);
 
-        playerJList = new JList(listPlayerModel);
+        playerJList = new JList<>(listPlayerModel);
         playerJList.setCellRenderer(new PlayerCellRenderer());
 
         playerJList.setFixedCellHeight(50);
@@ -44,7 +43,7 @@ public class SummaryPanel extends JPanel {
         for (Player player : gameEngineCallbackGUI.getPlayers()){
             listPlayerModel.addElement(player);
         }
-        playerJList = new JList(listPlayerModel);
+        playerJList = new JList<>(listPlayerModel);
         playerJList.setCellRenderer(new PlayerCellRenderer());
         playerJList.setFixedCellHeight(50);
         playerJList.setFixedCellWidth(380);
