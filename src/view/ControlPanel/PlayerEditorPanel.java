@@ -17,7 +17,7 @@ import static javax.swing.GroupLayout.Alignment.*;
 
 public class PlayerEditorPanel extends JPanel {
 
-    private Player selectedPlayer = new SimplePlayer("?", "No Player Choosen", 0);
+    private Player selectedPlayer = new SimplePlayer("?", "", 0);
     private Player newPlayer = new SimplePlayer("?", "No Player Created", 0);
     private JLabel playerNameLabel;
     private JLabel playerBetpointLabel;
@@ -170,7 +170,6 @@ public class PlayerEditorPanel extends JPanel {
 
     public void setSelectedPlayer(Player player){
         this.selectedPlayer = player;
-        //System.out.println(player.toString());
         populate(groupLayout);
     }
 
@@ -187,7 +186,6 @@ public class PlayerEditorPanel extends JPanel {
             }
         }
         if (flag){
-            System.out.println("ALL PLAYER have bet");
             gameEngine.spin(1, 200, 4);
         }
     }
@@ -197,7 +195,7 @@ public class PlayerEditorPanel extends JPanel {
         playerBetpointTextfield.setText("");
     }
     public void refreshEditorPanel(){
-        playerNameTextfield.setText("No player choosen");
-        playerBetpointTextfield.setText("0");
+        playerNameTextfield.setText("");
+        playerBetpointTextfield.setText("");
     }
 }

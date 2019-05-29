@@ -1,6 +1,5 @@
 package view;
 
-import model.GameEngineImpl;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
@@ -86,37 +85,6 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     public List<Player> getPlayers(){
         return (List<Player>) gameEngine.getAllPlayers();
     }
-
-//
-//    private void populate(){
-//        setLayout(new BorderLayout());
-//
-//        setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//
-//        wheelPanel = new WheelPanel();
-//        add(wheelPanel, BorderLayout.CENTER);
-//        wheelPanel.setPreferredSize(new Dimension(400,400));
-//
-//        summaryPanel = new SummaryPanel(this);
-//        add(summaryPanel, BorderLayout.WEST);
-//        summaryPanel.setPreferredSize(new Dimension(400,400));
-//
-//        controlPanel = new ControlPanel(this, gameEngine);
-//        add(controlPanel, BorderLayout.EAST);
-//        controlPanel.setPreferredSize(new Dimension(400,400));
-//
-//        statusBar = new StatusBar();
-//        add(statusBar, BorderLayout.SOUTH);
-//
-//        WheelMenuBar wheelMenuBar = new WheelMenuBar(this, this);
-//        setJMenuBar(wheelMenuBar);
-//
-//
-//        setBackground(Color.DARK_GRAY);
-//        setVisible(true);
-//    }
-//
 
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
