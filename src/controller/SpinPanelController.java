@@ -15,8 +15,6 @@ public class SpinPanelController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println("LOL");
-        gameEngine.spin(500,2000,200);
-
+        gameEngine.spin(1,200,4);
     }
 }

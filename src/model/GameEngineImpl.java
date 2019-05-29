@@ -119,10 +119,10 @@ public class GameEngineImpl implements GameEngine {
                     for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
                         gameEngineCallback.result(nextSlot, gameEngine );
                     }
-                    for (Player player: getAllPlayers()){
-                        player.setBet(0);
-                    }
                     gameEngine.calculateResult(nextSlot);
+                    for (Player player: getAllPlayers()){
+                        player.resetBet();
+                    }
                     timer.stop();
                 }
 

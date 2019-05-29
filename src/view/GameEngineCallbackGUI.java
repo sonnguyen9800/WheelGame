@@ -74,9 +74,13 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
 
     public void refreshPlayerSelectionPane(){
         this.controlPanel.getPlayerSelectionPanel().updateComboPlayers();
+        this.controlPanel.getPlayerEditorPanel().refreshEditorPanel();
     }
+
     public void refreshSummaryPanel(){
         this.summaryPanel.updateListPlayer();
+
+
     }
 
     public List<Player> getPlayers(){
@@ -145,6 +149,7 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
             }
         });
         refreshSummaryPanel();
+        refreshPlayerSelectionPane();
         statusBar.setMessage("New Result Updated");
 
     }

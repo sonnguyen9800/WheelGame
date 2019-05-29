@@ -2,6 +2,7 @@ package view.ControlPanel;
 
 import model.SimplePlayer;
 import model.enumeration.BetType;
+import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.GameEngineCallbackGUI;
 import view.interfaces.GameEngineCallback;
@@ -33,12 +34,13 @@ public class PlayerEditorPanel extends JPanel {
     private JButton destroyButton;
 
     private GameEngineCallbackGUI gameEngineCallbackGUI;
+    private GameEngine gameEngine;
 
     private GroupLayout groupLayout;
-    public PlayerEditorPanel(GameEngineCallbackGUI gameEngineCallbackGUI){
+    public PlayerEditorPanel(GameEngineCallbackGUI gameEngineCallbackGUI, GameEngine gameEngine){
         groupLayout = new GroupLayout(this);
         setLayout(groupLayout);
-
+        this.gameEngine = gameEngine;
         this.gameEngineCallbackGUI = gameEngineCallbackGUI;
 
 
@@ -176,10 +178,26 @@ public class PlayerEditorPanel extends JPanel {
         oldPlayer.setPlayerName(newPlayer.getPlayerName());
         oldPlayer.setBet(newPlayer.getBet());
         oldPlayer.setBetType(newPlayer.getBetType());
+
+        boolean flag = true;
+        for (Player player : gameEngineCallbackGUI.getPlayers()){
+            if (player.getBet() == 0){
+                flag = false;
+                break;
+            }
+        }
+        if (flag){
+            System.out.println("ALL PLAYER have bet");
+            gameEngine.spin(1, 200, 4);
+        }
     }
 
     private void resetTextArea(){
         playerNameTextfield.setText("");
         playerBetpointTextfield.setText("");
+    }
+    public void refreshEditorPanel(){
+        playerNameTextfield.setText("No player choosen");
+        playerBetpointTextfield.setText("0");
     }
 }

@@ -15,7 +15,7 @@ public class ControlPanel extends JPanel {
         Border border = BorderFactory.createTitledBorder(title);
 
         playerSelectionPanel = new PlayerSelectionPanel(gameEngineCallbackGUI);
-        playerEditorPanel= new PlayerEditorPanel(gameEngineCallbackGUI);
+        playerEditorPanel= new PlayerEditorPanel(gameEngineCallbackGUI, gameEngine);
 
         this.gameEngine = gameEngine;
         this.setBorder(border);
