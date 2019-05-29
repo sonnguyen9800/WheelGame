@@ -1,6 +1,6 @@
 package view;
 
-import model.SimplePlayer;
+import model.GameEngineImpl;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
@@ -20,7 +20,6 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     public final static int WHEELGAME_WIDTH = 1200;
     public final static int WHEELGAME_HEIGHT = 480;
 
-    private List<Player> players = new ArrayList<Player>();
     private Player selectedPlayer;
 
     private static GameEngineCallback singletonInstance = new GameEngineCallbackGUI();
@@ -42,20 +41,20 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     }
 
     public void createNewPlayer(Player player){
-        players.add(player);
+        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+        gameEngine.addPlayer(player);
         summaryPanel.addnewPlayer(player);
         controlPanel.getPlayerSelectionPanel().updateComboPlayers();
-        logAllPlayers();
     }
 
     public void setSelectedPlayer(Player player){
         this.selectedPlayer = player;
         this.controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
-        logSelectedPlayers();
     }
 
     public void removePlayer(Player player){
-        players.remove(player);
+        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+        gameEngine.removePlayer(player);
     }
 
     public void refreshPlayerSelectionPane(){
@@ -66,7 +65,9 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     }
 
     public List<Player> getPlayers(){
-        return this.players;
+        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+        return (List<Player>) gameEngine.getAllPlayers();
+
     }
 
     public static void main(String[] args) {
@@ -75,7 +76,7 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
             @Override
             public void run()
             {
-                //GameEngineCallbackGUI.getSingletonInstance();
+                GameEngineCallbackGUI.getSingletonInstance();
             }
         });
     }
@@ -83,17 +84,15 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
 
     public void populate(){
         //setLayout(new GridLayout());
+        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
         setLayout(new BorderLayout());
-
-        players.add(new SimplePlayer("1", "John", 10));
-        players.add(new SimplePlayer("1", "Joh423", 10));
 
         setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-//        wheelPanel = new WheelPanel();
-//        add(wheelPanel, BorderLayout.CENTER);
-//        wheelPanel.setPreferredSize(new Dimension(400,400));
+        wheelPanel = new WheelPanel();
+        add(wheelPanel, BorderLayout.CENTER);
+        wheelPanel.setPreferredSize(new Dimension(400,400));
 
         summaryPanel = new SummaryPanel();
         add(summaryPanel, BorderLayout.WEST);
@@ -109,38 +108,49 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         wheelMenuBar = new WheelMenuBar(this);
         setJMenuBar(wheelMenuBar);
 
+
         setBackground(Color.DARK_GRAY);
         setVisible(true);
     }
+
 
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
         int index = 0;
         ArrayList list = new ArrayList(engine.getWheelSlots());
         index = list.indexOf(slot);
-        this.wheelPanel.paintMovingBall(index);
+        int finalIndex = index;
+
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                wheelPanel.paintMovingBall(finalIndex);
+            }
+        });
     }
 
     @Override
     public void result(Slot winningSlot, GameEngine engine) {
+
         int index = 0;
         ArrayList list = new ArrayList(engine.getWheelSlots());
         index = list.indexOf(winningSlot);
-        this.wheelPanel.paintMovingBall(index);
+
+        int finalIndex = index;
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                wheelPanel.paintMovingBall(finalIndex);
+            }
+        });
+        refreshSummaryPanel();
+
     }
 
-    public void logAllPlayers(){
-        System.out.println("All Players: ");
-        for (Player player : players){
-            System.out.println(player.toString());
-        }
-    }
-    public void logSelectedPlayers(){
-        if (selectedPlayer != null){
-            System.out.println("Selected:" + selectedPlayer.toString());
-        }else{
-            System.out.println("Null");
-        }
-    }
+
 
 }

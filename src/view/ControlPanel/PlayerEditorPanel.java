@@ -110,6 +110,7 @@ public class PlayerEditorPanel extends JPanel {
                     gameEngineCallbackGUI.removePlayer(selectedPlayer);
                     gameEngineCallbackGUI.refreshSummaryPanel();
                     gameEngineCallbackGUI.refreshPlayerSelectionPane();
+                    resetTextArea();
                 }
 
             }
@@ -173,5 +174,10 @@ public class PlayerEditorPanel extends JPanel {
         oldPlayer.setPlayerName(newPlayer.getPlayerName());
         oldPlayer.setBet(newPlayer.getBet());
         oldPlayer.setBetType(newPlayer.getBetType());
+    }
+
+    public void resetTextArea(){
+        playerNameTextfield.setText("");
+        playerBetpointTextfield.setText("");
     }
 }

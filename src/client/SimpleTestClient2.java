@@ -33,39 +33,9 @@ public class SimpleTestClient2 {
     public static void main(String[] args) {
         final GameEngine gameEngine = GameEngineImpl.getSingletonInstance();
 
-        // call method in Validator.jar to test *structural* correctness
-        // just passing this does not mean it actually works .. you need to test yourself!
-        // pass false if you want to show minimal logging (pass/fail) .. (i.e. ONLY once it passes)
-
         gameEngine.addGameEngineCallback(GameEngineCallbackImpl.getSingletonInstance());
         gameEngine.addGameEngineCallback(GameEngineCallbackGUI.getSingletonInstance());
-
-
-        // check the wheel creation is correct by inspecting logs
-        logWheel(gameEngine.getWheelSlots());
-
-        // main loop to add players and place a bet
-//
-//        for (Player player : players) {
-//            gameEngine.addPlayer(player);
-//            // mod with BetType length so we always stay in range even if num players increases
-//            // NOTE: we are passing a different BetType each time!
-//            gameEngine.placeBet(player, 100, BetType.values()[enumOrdinal++ % BetType
-//                    .values().length]);
-//        }
-
-       // logger.log(Level.INFO, "SPINNING ...");
-        // NOTE: result logging is done via GameEngineCallback.result()
-        // after it calls GameEngine.calculateResult())
-        // OutputTrace.txt was generated with these parameter values
-        gameEngine.spin(1, 500, 25);
+        gameEngine.spin(1, 500, 50);
     }
 
-    // private helper method to log wheel slots
-    private static void logWheel(Collection<Slot> wheel) {
-        logger.log(Level.INFO, "LOGGING WHEEL DATA CREATED BY GameEngineImpl");
-        for (Slot slot : wheel)
-            logger.log(Level.INFO, slot.toString());
-        logger.log(Level.INFO, "END WHEEL LOG\n");
-    }
 }

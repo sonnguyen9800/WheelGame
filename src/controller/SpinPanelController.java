@@ -1,31 +1,18 @@
 package controller;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import model.GameEngineImpl;
 
-public class SpinPanelController implements MouseListener {
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    }
 
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
+public class SpinPanelController implements ActionListener {
 
     @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
+    public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println("LOL");
+        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+        gameEngine.spin(500,2000,200);
 
     }
 }

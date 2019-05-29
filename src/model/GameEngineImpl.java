@@ -5,9 +5,11 @@ import model.enumeration.Color;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.Slot;
-import view.GameEngineCallbackGUI;
 import view.interfaces.GameEngineCallback;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,11 +18,11 @@ import java.util.Random;
 public class GameEngineImpl implements GameEngine {
 
     private static GameEngine singletonInstance = new GameEngineImpl();
-
     public static GameEngine getSingletonInstance()
     {
         return singletonInstance;
     }
+
     //Collection of Slots:
     private static List<Slot> SlotsCollection = iniSlotCollection();
     //Collection of Player:
@@ -100,31 +102,36 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
-        Slot nextSlot = randomlySelectASlot(SlotsCollection);
+        Slot firstSlot = randomlySelectASlot(SlotsCollection);
         for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-            gameEngineCallback.nextSlot(nextSlot, this);
+            gameEngineCallback.nextSlot(firstSlot, this);
         }
 
-        while (initialDelay < (finalDelay - delayIncrement)) {
-            try {
-                Thread.sleep((long) initialDelay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        Timer timer = new Timer(initialDelay, null);
+        timer.addActionListener(new ActionListener() {
+            Slot nextSlot = firstSlot;
+            int delay = initialDelay;
+            GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (delay < (finalDelay-delayIncrement)){
+                    nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
+                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
+                        gameEngineCallback.nextSlot(nextSlot, gameEngine );
+                    }
+                    timer.setDelay(delay += delayIncrement);
+                } else{
+                    nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
+                    for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
+                        gameEngineCallback.result(nextSlot, gameEngine );
+                    }
+                    gameEngine.calculateResult(nextSlot);
+                    timer.stop();
+                }
+
             }
-            initialDelay += delayIncrement;
-            nextSlot = moveToNextSlot(nextSlot, SlotsCollection);
-
-            for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-                gameEngineCallback.nextSlot(nextSlot, this);
-            }
-
-        }
-        Slot lastSlot = moveToNextSlot(nextSlot, SlotsCollection);
-
-        for (GameEngineCallback gameEngineCallback : GameEnginesCallBacks) {
-            gameEngineCallback.result(lastSlot, this);
-        }
-        this.calculateResult(lastSlot);
+        });
+        timer.start();
 
     }
 
