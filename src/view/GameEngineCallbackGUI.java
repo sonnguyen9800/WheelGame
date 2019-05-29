@@ -17,10 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback {
-    public final static int WHEELGAME_WIDTH = 1200;
-    public final static int WHEELGAME_HEIGHT = 480;
-
-    private Player selectedPlayer;
+    private final static int WHEELGAME_WIDTH = 1200;
+    private final static int WHEELGAME_HEIGHT = 480;
 
     private static GameEngineCallback singletonInstance = new GameEngineCallbackGUI();
 
@@ -33,7 +31,6 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     private ControlPanel controlPanel;
     private SummaryPanel summaryPanel;
     private StatusBar statusBar;
-    private WheelMenuBar wheelMenuBar;
 
     private GameEngineCallbackGUI(){
         super("Wheel Game");
@@ -48,7 +45,6 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
     }
 
     public void setSelectedPlayer(Player player){
-        this.selectedPlayer = player;
         this.controlPanel.getPlayerEditorPanel().setSelectedPlayer(player);
     }
 
@@ -70,21 +66,8 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                GameEngineCallbackGUI.getSingletonInstance();
-            }
-        });
-    }
 
-
-    public void populate(){
-        //setLayout(new GridLayout());
-        GameEngineImpl gameEngine = (GameEngineImpl) GameEngineImpl.getSingletonInstance();
+    private void populate(){
         setLayout(new BorderLayout());
 
         setSize(WHEELGAME_WIDTH, WHEELGAME_HEIGHT);
@@ -105,7 +88,7 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         statusBar = new StatusBar();
         add(statusBar, BorderLayout.SOUTH);
 
-        wheelMenuBar = new WheelMenuBar(this);
+        WheelMenuBar wheelMenuBar = new WheelMenuBar(this);
         setJMenuBar(wheelMenuBar);
 
 
@@ -120,34 +103,21 @@ public class GameEngineCallbackGUI extends JFrame implements GameEngineCallback 
         ArrayList list = new ArrayList(engine.getWheelSlots());
         index = list.indexOf(slot);
         int finalIndex = index;
-
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                wheelPanel.paintMovingBall(finalIndex);
-            }
-        });
+        statusBar.setMessage("Spinning");
+        SwingUtilities.invokeLater(() -> wheelPanel.paintMovingBall(finalIndex));
     }
 
     @Override
     public void result(Slot winningSlot, GameEngine engine) {
 
-        int index = 0;
+        int index;
         ArrayList list = new ArrayList(engine.getWheelSlots());
         index = list.indexOf(winningSlot);
 
         int finalIndex = index;
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                wheelPanel.paintMovingBall(finalIndex);
-            }
-        });
+        SwingUtilities.invokeLater(() -> wheelPanel.paintMovingBall(finalIndex));
         refreshSummaryPanel();
+        statusBar.setMessage("New Result Updated");
 
     }
 
