@@ -19,7 +19,7 @@ public interface GameEngineCallback {
      * @param engine - a convenience reference to the engine so the receiver can call methods if necessary
      * @see model.interfaces.GameEngine
      */
-    public void nextSlot(Slot slot, GameEngine engine);
+    void nextSlot(Slot slot, GameEngine engine);
 
     /**
      * called when the wheel has stopped spinning<br>
@@ -30,5 +30,5 @@ public interface GameEngineCallback {
      * @param engine      - a convenience reference to the engine so the receiver can call methods if necessary
      * @see model.interfaces.GameEngine
      */
-    public void result(Slot winningSlot, GameEngine engine);
+    void result(Slot winningSlot, GameEngine engine);
 }

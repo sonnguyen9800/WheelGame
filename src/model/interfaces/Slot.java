@@ -21,22 +21,22 @@ public interface Slot {
     /**
      * the size of the gaming wheel configured according to the assignment specification
      */
-    public static final int WHEEL_SIZE = 38;
+    int WHEEL_SIZE = 38;
 
     /**
      * @return - the position of this slot (clockwise starting from position 0 for Slot GREEN00)
      */
-    public int getPosition();
+    int getPosition();
 
     /**
      * @return - the numeric value of this slot as displayed on the gaming wheel
      */
-    public int getNumber();
+    int getNumber();
 
     /**
      * @return - the color of this slot based on {@link Color}
      */
-    public Color getColor();
+    Color getColor();
 
     /**
      * @return <pre> A human readable String that lists the values of this WheelSlot instance (see OutputTrace.txt)
@@ -45,13 +45,13 @@ public interface Slot {
      * e.g. "Position: 0, Color: GREEN00, Number: 0" for "00" slot at top of wheel</pre>
      */
     @Override
-    public abstract String toString();
+    String toString();
 
     /**
      * @param slot - another Slot to compare with
      * @return - true if the color and number fields are equal
      */
-    public abstract boolean equals(Slot slot);
+    boolean equals(Slot slot);
 
     /**
      * <pre> <b>NOTE:</b> this is the java.lang.Object @Override
@@ -62,7 +62,7 @@ public interface Slot {
      * @return - true if the slot values are equal according to above equals method
      */
     @Override
-    public abstract boolean equals(Object slot);
+    boolean equals(Object slot);
 
     /**
      * <b>NOTE:</b> if equals() is true then generated hashCode should also be equal
@@ -70,5 +70,5 @@ public interface Slot {
      * @return - generated hash code (used by various JCF Collections)
      */
     @Override
-    public abstract int hashCode();
+    int hashCode();
 }

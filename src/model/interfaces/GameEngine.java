@@ -38,14 +38,14 @@ public interface GameEngine {
      *            how much the ball slows down (i.e. delay gets longer) after each slot
      * </pre>
      */
-    public abstract void spin(int initialDelay, int finalDelay, int delayIncrement);
+    void spin(int initialDelay, int finalDelay, int delayIncrement);
 
     /**
      * Iterate through players and apply win/loss point balances (via {@link BetType#applyWinLoss(Player player, Slot winSlot)})
      *
      * @param winningSlot - the winning slot as passed to GameEngineCallback.result(...)
      */
-    public abstract void calculateResult(Slot winningSlot);
+    void calculateResult(Slot winningSlot);
 
     /**
      * <b>NOTE:</b> playerID is unique and if another player with same id is added
@@ -53,19 +53,19 @@ public interface GameEngine {
      *
      * @param player - to add to game
      */
-    public abstract void addPlayer(Player player);
+    void addPlayer(Player player);
 
     /**
      * @param id - id of player to retrieve (null if not found)
      * @return - the Player or null if Player does not exist
      */
-    public abstract Player getPlayer(String id);
+    Player getPlayer(String id);
 
     /**
      * @param player - to remove from game
      * @return - true if the player existed and was removed
      */
-    public abstract boolean removePlayer(Player player);
+    boolean removePlayer(Player player);
 
     /**
      * @param gameEngineCallback <pre> a client specific implementation of GameEngineCallback used to perform display updates etc.
@@ -73,20 +73,20 @@ public interface GameEngine {
      *                                 for the console (assignment 1) and GUI (assignment 2) versions</pre>
      * @see view.interfaces.GameEngineCallback
      */
-    public abstract void addGameEngineCallback(GameEngineCallback gameEngineCallback);
+    void addGameEngineCallback(GameEngineCallback gameEngineCallback);
 
     /**
      * @param gameEngineCallback - instance to be removed if no longer needed
      * @return true - if the gameEngineCallback existed
      * @see view.interfaces.GameEngineCallback
      */
-    public abstract boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback);
+    boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback);
 
     /**
      * @return - an unmodifiable collection (or a shallow copy) of all Players
      * @see model.interfaces.Player
      */
-    public abstract Collection<Player> getAllPlayers();
+    Collection<Player> getAllPlayers();
 
     /**
      * the implementation should make appropriate calls on the Player to place the bet and set bet type
@@ -96,7 +96,7 @@ public interface GameEngine {
      * @param betType - the type of bet (red, black or either zero)
      * @return true - if bet is greater than 0 and player had sufficient points to place the bet
      */
-    public abstract boolean placeBet(Player player, int bet, BetType betType);
+    boolean placeBet(Player player, int bet, BetType betType);
 
     /**
      * <pre> A debug method to return a FULL representation of the 38 slot gaming wheel
@@ -108,5 +108,5 @@ public interface GameEngine {
      * @return any java.util.Collection of Slot
      * @see model.interfaces.Slot
      */
-    public abstract Collection<Slot> getWheelSlots();
+    Collection<Slot> getWheelSlots();
 }
