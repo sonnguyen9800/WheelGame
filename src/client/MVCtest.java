@@ -7,7 +7,11 @@ import view.GameEngineCallbackImpl;
 import view.interfaces.GameEngineCallback;
 
 import javax.swing.*;
-
+/**
+ * MAIN RUNNER
+ *
+ * Run this file to play the game
+ */
 public class MVCtest {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

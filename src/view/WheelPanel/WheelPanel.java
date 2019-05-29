@@ -18,7 +18,7 @@ public class WheelPanel extends JPanel  {
 
     public WheelPanel() {
         try {
-            image = ImageIO.read(new File("img/wheel_image.png"));
+            image = ImageIO.read(new File("img/Basic_roulette_wheel_1024x1024.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class WheelPanel extends JPanel  {
      */
     private void paintBall(Graphics g, int width, int scaleWidth, int scaleHeight, int x, int y, int time){
         try {
-            image = ImageIO.read(new File("img/wheel_image.png"));
+            image = ImageIO.read(new File("img/Basic_roulette_wheel_1024x1024.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
